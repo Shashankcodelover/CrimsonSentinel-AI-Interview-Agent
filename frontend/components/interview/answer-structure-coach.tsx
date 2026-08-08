@@ -1,56 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { structureCoverage } from "@/lib/answer-structure";
 import { cn } from "@/lib/utils";
-
-type Pillar = {
-  id: string;
-  label: string;
-  hint: string;
-  keys: string[];
-};
-
-const PILLARS: Pillar[] = [
-  {
-    id: "claim",
-    label: "Claim",
-    hint: "Clear stance",
-    keys: ["i would", "we should", "prefer", "recommend", "choose", "opt for"],
-  },
-  {
-    id: "mechanism",
-    label: "Mechanism",
-    hint: "How it works",
-    keys: ["because", "by ", "via ", "using", "pipeline", "queue", "cache", "lock", "replica"],
-  },
-  {
-    id: "tradeoff",
-    label: "Tradeoff",
-    hint: "Cost vs gain",
-    keys: ["tradeoff", "trade-off", "vs ", "instead", "cost", "latency", "complexity", "rather"],
-  },
-  {
-    id: "failure",
-    label: "Failure",
-    hint: "Break modes",
-    keys: ["fail", "timeout", "retry", "fallback", "outage", "race", "partition", "rollback"],
-  },
-];
-
-export function structureCoverage(draft: string): {
-  id: string;
-  label: string;
-  hint: string;
-  hit: boolean;
-}[] {
-  const text = draft.toLowerCase();
-  return PILLARS.map((p) => ({
-    id: p.id,
-    label: p.label,
-    hint: p.hint,
-    hit: p.keys.some((k) => text.includes(k)),
-  }));
-}
 
 type Props = {
   draft: string;
