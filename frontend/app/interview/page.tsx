@@ -25,6 +25,7 @@ import { RoleCalibrationStrip } from "@/components/interview/role-calibration-st
 import { SignalHighlight } from "@/components/interview/signal-highlight";
 import { TimePressureArc } from "@/components/interview/time-pressure-arc";
 import { UncertaintyBanner } from "@/components/interview/uncertainty-banner";
+import { ProbeCadence } from "@/components/interview/probe-cadence";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -271,6 +272,8 @@ export default function InterviewPage() {
       </div>
 
       <RoleCalibrationStrip candidate={session.candidate} />
+
+      <ProbeCadence questionCount={session.questionCount} />
 
       <TimePressureArc elapsedSeconds={elapsed} />
 
