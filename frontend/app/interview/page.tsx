@@ -26,6 +26,7 @@ import { SignalHighlight } from "@/components/interview/signal-highlight";
 import { TimePressureArc } from "@/components/interview/time-pressure-arc";
 import { UncertaintyBanner } from "@/components/interview/uncertainty-banner";
 import { ProbeCadence } from "@/components/interview/probe-cadence";
+import { AnswerStructureCoach } from "@/components/interview/answer-structure-coach";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -362,6 +363,7 @@ export default function InterviewPage() {
               }}
               className="min-h-[120px] flex-1 resize-none rounded-sm border-0 bg-[#0f0f0f] p-4 font-code text-code-md leading-[22px] text-on-surface shadow-none placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary-container/50 md:min-h-[180px] md:text-code-md"
             />
+            <AnswerStructureCoach draft={draft} />
             {error && (
               <p role="alert" className="mt-2 font-code text-code-md text-error">
                 {error}
