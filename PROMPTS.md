@@ -452,3 +452,23 @@ None.
 
 ### Timestamp
 2026-08-08T13:25:03+05:30
+
+## Prompt 23
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+Lock policy: commit often on feature/next-level only, never main; finish Session Diff + docs; continue Tier plan.
+
+### Prompt
+My main thing was do not teach any main branch whatever you do or whenever you push to the new branch Dutch maintain the new branch do not push to the main branch and commit as much as possible because whenever you do one set of work just commit to it Okay because we need also want to commit as much as possible to get into the guidance of the interview or the Invigilator the Z will be They will be a judgement according to this committee okay so just commit as much as possible when you will find your work has to be done And to the new branch it will be the best and you can continue your work the tier one or tie ray you can improve the project according to your plan
+
+### Output Summary
+Policy confirmed. Fixed TopicId typing on counterfactuals. Shipped Session Diff on results (What changed since Q1). Updated FEATURES/TEAM_NOTES. Commits + push only to origin/feature/next-level — main never touched.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:35:00+05:30

@@ -108,8 +108,11 @@ Status: **shipped on `feature/next-level`** — Probe Depth, Memory Rail (+ topi
 **Follow-on commits (same branch, still frontend-only):**
 - Role Calibration Strip  
 - Answer Signal Highlighter  
+- Soft Time Pressure Arc  
+- Honest Uncertainty Flags  
 - Rubric Mirror (console → report)  
 - Counterfactual Probes on results  
+- Session Diff View on results  
 
 ---
 
@@ -121,13 +124,13 @@ Still useful for judge talk; several items promoted into follow-on commits above
 |------|--------|
 | Answer Signal Highlighter | **Shipped** on feature/next-level |
 | Role Calibration Strip | **Shipped** on feature/next-level |
-| Soft Time Pressure Arc | Parked — lower uniqueness |
-| Session Diff View | Parked — more UX churn |
+| Soft Time Pressure Arc | **Shipped** on feature/next-level |
+| Session Diff View | **Shipped** on feature/next-level |
 | Rubric Mirror on Results | **Shipped** on feature/next-level |
 | Counterfactual Probe Cards | **Shipped** on feature/next-level |
-| Honest Uncertainty Flags | Parked — needs careful UX copy |
+| Honest Uncertainty Flags | **Shipped** on feature/next-level |
 
-Pitch line for judges: *“You see memory and depth live in the console; the report mirrors those signals and still lists probes a senior might ask next.”*
+Pitch line for judges: *“You see memory and depth live in the console; the report mirrors those signals, shows what shifted since Q1, and still lists probes a senior might ask next.”*
 
 ---
 
@@ -152,6 +155,6 @@ Talking points for Member 2:
 | State | Items |
 |-------|--------|
 | **Shipped baseline** | Landing, Setup, Interview, Results, mock API, demo/timer/copy/print |
-| **Shipped Tier A + follow-ons** | Probe Depth, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Rubric Mirror, Counterfactuals |
-| **Roadmap (Tier B remaining)** | Time arc, session diff, uncertainty flags |
+| **Shipped Tier A + follow-ons** | Probe Depth, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Rubric Mirror, Counterfactuals, Session Diff |
+| **Roadmap (Tier B remaining)** | Polish / judge-demo hardening only — core Tier B items shipped |
 | **Backend-gated (Tier C)** | Real Breeth confidence + follow-up graph |
