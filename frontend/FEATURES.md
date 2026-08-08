@@ -113,6 +113,7 @@ Status: **shipped on `feature/next-level`** — Probe Depth, Memory Rail (+ topi
 - Rubric Mirror (console → report)  
 - Counterfactual Probes on results  
 - Session Diff View on results  
+- Probe Cadence spine (Q1–Q6 soft arc)  
 
 ---
 
@@ -155,6 +156,6 @@ Talking points for Member 2:
 | State | Items |
 |-------|--------|
 | **Shipped baseline** | Landing, Setup, Interview, Results, mock API, demo/timer/copy/print |
-| **Shipped Tier A + follow-ons** | Probe Depth, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Rubric Mirror, Counterfactuals, Session Diff |
+| **Shipped Tier A + follow-ons** | Probe Depth, Probe Cadence, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Rubric Mirror, Counterfactuals, Session Diff |
 | **Roadmap (Tier B remaining)** | Polish / judge-demo hardening only — core Tier B items shipped |
 | **Backend-gated (Tier C)** | Real Breeth confidence + follow-up graph |
