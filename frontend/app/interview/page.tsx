@@ -261,7 +261,8 @@ export default function InterviewPage() {
   return (
     <div
       className={cn(
-        "flex h-svh flex-col overflow-hidden bg-level-0",
+        "flex h-[100dvh] flex-col bg-level-0",
+        "overflow-x-hidden overflow-y-auto md:overflow-hidden",
         focusMode && "interview-focus-mode"
       )}
     >
