@@ -407,3 +407,23 @@ None.
 
 ### Timestamp
 2026-08-08T13:19:47+05:30
+
+## Prompt 21
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+User wants frequent commits on feature/next-level only (never main) for judge commit history; continue Tier improvements one commit at a time.
+
+### Prompt
+My main thing was do not teach any main branch whatever you do or whenever you push to the new branch Dutch maintain the new branch do not push to the main branch and commit as much as possible because whenever you do one set of work just commit to it Okay because we need also want to commit as much as possible to get into the guidance of the interview or the Invigilator the Z will be They will be a judgement according to this committee okay so just commit as much as possible when you will find your work has to be done And to the new branch it will be the best and you can continue your work the tier one or tie ray you can improve the project according to your plan
+
+### Output Summary
+Policy locked: feature/next-level only, no main. Starting incremental commits — first: Role Calibration Strip.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:22:42+05:30

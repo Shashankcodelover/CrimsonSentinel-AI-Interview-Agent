@@ -20,6 +20,7 @@ import { cn } from "@/lib/utils";
 import { ProbeDepthMeter } from "@/components/interview/probe-depth-meter";
 import { MemoryRail } from "@/components/interview/memory-rail";
 import { LiveEvalDraft } from "@/components/interview/live-eval-draft";
+import { RoleCalibrationStrip } from "@/components/interview/role-calibration-strip";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -263,6 +264,8 @@ export default function InterviewPage() {
           </button>
         </div>
       </div>
+
+      <RoleCalibrationStrip candidate={session.candidate} />
 
       <div className="h-0.5 w-full bg-level-1">
         <div
