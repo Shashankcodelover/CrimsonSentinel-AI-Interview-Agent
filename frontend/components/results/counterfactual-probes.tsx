@@ -2,15 +2,17 @@
 
 import { motion } from "framer-motion";
 import type { InterviewMessage } from "@/lib/types";
-import { getTopics } from "@/lib/interview-insights";
+import { getTopics, type TopicId } from "@/lib/interview-insights";
 
 type Props = {
   messages: InterviewMessage[];
 };
 
 function buildCounterfactuals(messages: InterviewMessage[]): string[] {
-  const touched = new Set(getTopics(messages).filter((t) => t.touched).map((t) => t.id));
-  const pool: { id: string; prompt: string }[] = [
+  const touched = new Set(
+    getTopics(messages).filter((t) => t.touched).map((t) => t.id)
+  );
+  const pool: { id: TopicId; prompt: string }[] = [
     {
       id: "reliability",
       prompt:

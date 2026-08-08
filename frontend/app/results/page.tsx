@@ -14,6 +14,7 @@ import type { Feedback, InterviewSessionState } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { RubricMirror } from "@/components/results/rubric-mirror";
 import { CounterfactualProbes } from "@/components/results/counterfactual-probes";
+import { SessionDiff } from "@/components/results/session-diff";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -87,6 +88,8 @@ export default function ResultsPage() {
         </motion.section>
 
         <RubricMirror messages={session.messages} />
+
+        <SessionDiff messages={session.messages} />
 
         <div className="grid grid-cols-1 gap-gutter md:grid-cols-12 print:gap-4">
           <StrengthsCard strengths={feedback.strengths} />
