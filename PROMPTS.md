@@ -512,3 +512,95 @@ None.
 
 ### Timestamp
 2026-08-08T16:26:00+05:30
+
+## Prompt 26
+
+### Tool Used
+Antigravity (Claude Opus 4.6) — switched from Cursor due to Cursor usage limit, not a project restart.
+
+### Purpose
+Diagnose and fix "Internal Server Error" on the app. Re-read entire codebase from scratch (no prior memory). Test API route in isolation, then full page renders.
+
+### Prompt
+(Full re-onboard + fix prompt — see user request for Prompt 26)
+
+### Output Summary
+Root cause confirmed: same as Prompt 10 — `.next` build output was corrupted (likely from a prior `npm run build` while `npm run dev` was still running). Fix: killed all 16 stale node processes, deleted `.next`, restarted `npm run dev --turbopack` clean. Verified:
+- API start, turn, end all return correct JSON (Invoke-RestMethod tests)
+- All 4 pages return HTTP 200 (/, /setup, /interview, /results)
+- TypeScript typecheck: clean
+- Vitest: 19/19 tests pass (4 suites)
+- Git working tree: clean, branch feature/next-level, latest commit 94388e7
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T16:42:00+05:30
+
+## Prompt 27
+
+### Tool Used
+Antigravity (Gemini 3.1 Pro)
+
+### Purpose
+Clean rebuild, zero shortcuts, testing the production build (Vercel mode).
+
+### Prompt
+(Step 1 — Clean rebuild and full test of the production build.)
+
+### Output Summary
+1. Killed all node processes and deleted `.next`.
+2. Ran `npm run build` — completed successfully in 12.9s with zero errors (9/9 static pages generated).
+3. Ran `npm run start` and verified all endpoints via Invoke-RestMethod. All passed.
+4. Rendered all pages natively (/, /setup, /interview, /results). All passed. No build/dev collision.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T17:21:00+05:30
+
+## Prompt 28
+
+### Tool Used
+Antigravity (Gemini 3.1 Pro)
+
+### Purpose
+Implement two selected flagship features: Live Interviewer Strategy Panel and Pressure Moment Highlights.
+
+### Prompt
+(Step 2 — Build Exactly These Two)
+
+### Output Summary
+1. **Live Interviewer Strategy Panel**: Added `getStrategyReasoning` heuristic to compose human-readable explanation of why a question was asked. Built `<StrategyPanel>` collapsible component and wired it into `/interview/page.tsx`.
+2. **Pressure Moment Highlights**: Added `getPressureMoments` scoring function to identify the top 2-3 breakthrough or pressure point moments. Built `<PressureMoments>` card component and wired it into `/results/page.tsx`.
+3. Verified both compile successfully and render cleanly. `vitest` suite remains at 19/19 passing.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T17:26:00+05:30
+
+## Prompt 29
+
+### Tool Used
+Antigravity (Gemini 3.1 Pro)
+
+### Purpose
+Design Cohesion Audit — verify first impressions and visual consistency, simplify hierarchy where crowded.
+
+### Prompt
+(Step 3 — Design Cohesion Audit)
+
+### Output Summary
+- **Landing Page**: Removed the redundant "Demo & prefs" section at the bottom (try demo is already prominently featured in the hero).
+- **Interview Console**: The top header had 5 stacked telemetry banners (`RoleCalibrationStrip`, `ProbeCadence`, `TimePressureArc`, `ProbeDepthMeter`, `UncertaintyBanner`). Grouped all 5 behind a single "Show Diagnostics" toggle button to massively simplify default visual weight and let candidates focus on the actual conversation.
+- **Results Page**: The page was a linear stacked pile of widgets. Reordered components and wrapped them into CSS grids (2-column grids for `CoverageRadar` + `RubricScorecard`, `PressureMoments` + `SessionDiff`, etc.) to compress vertical length and present as a cohesive single report. Moved Score grid up closer to the hero.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T17:29:00+05:30

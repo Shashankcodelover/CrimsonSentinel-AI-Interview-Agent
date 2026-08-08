@@ -11,6 +11,7 @@ import {
   getGhostProbe,
   getMemoryChips,
   getProbeDepth,
+  getStrategyReasoning,
   getTopics,
   getUncertaintyFlag,
 } from "@/lib/interview-insights";
@@ -31,6 +32,7 @@ import { CoverageRadar } from "@/components/interview/coverage-radar";
 import { StickyNotes } from "@/components/interview/sticky-notes";
 import { ConfidenceDial } from "@/components/interview/confidence-dial";
 import { PaceMeter } from "@/components/interview/pace-meter";
+import { StrategyPanel } from "@/components/interview/strategy-panel";
 import { PrefsBar } from "@/components/shared/prefs-bar";
 import { loadBookmarks, loadPrefs, toggleBookmark } from "@/lib/ui-prefs";
 
@@ -38,6 +40,7 @@ export default function InterviewPage() {
   const router = useRouter();
   const [session, setSession] = useState<InterviewSessionState | null>(null);
   const [draft, setDraft] = useState("");
+  const [showDiagnostics, setShowDiagnostics] = useState(false);
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bootstrapping, setBootstrapping] = useState(true);
@@ -253,6 +256,7 @@ export default function InterviewPage() {
   const draftSignals = getDraftSignals(session.messages);
   const ghostProbe = getGhostProbe(session.messages, session.questionCount);
   const uncertainty = getUncertaintyFlag(session.messages);
+  const strategy = getStrategyReasoning(session.candidate, session.messages, session.questionCount);
 
   return (
     <div
@@ -292,6 +296,18 @@ export default function InterviewPage() {
           </div>
           <button
             type="button"
+            onClick={() => setShowDiagnostics((prev) => !prev)}
+            className={cn(
+              "rounded-sm border bg-transparent px-3 py-1.5 font-code text-[11px] uppercase tracking-wider transition-colors",
+              showDiagnostics
+                ? "border-brand/50 text-brand"
+                : "border-border-high text-muted-foreground hover:border-on-surface hover:text-on-surface"
+            )}
+          >
+            {showDiagnostics ? "Hide Diagnostics" : "Show Diagnostics"}
+          </button>
+          <button
+            type="button"
             disabled={thinking}
             onClick={() => setConfirmEnd(true)}
             className="rounded-sm border border-border-high bg-transparent px-3 py-1.5 font-code text-code-md text-muted-foreground transition-colors hover:border-on-surface hover:text-on-surface disabled:opacity-50"
@@ -301,15 +317,24 @@ export default function InterviewPage() {
         </div>
       </div>
 
-      <RoleCalibrationStrip candidate={session.candidate} />
+      <AnimatePresence>
+        {showDiagnostics && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <RoleCalibrationStrip candidate={session.candidate} />
+            <ProbeCadence questionCount={session.questionCount} />
+            <TimePressureArc elapsedSeconds={elapsed} />
+            <ProbeDepthMeter pct={probe.pct} label={probe.label} />
+            <UncertaintyBanner flag={uncertainty} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-      <ProbeCadence questionCount={session.questionCount} />
-
-      <TimePressureArc elapsedSeconds={elapsed} />
-
-      <ProbeDepthMeter pct={probe.pct} label={probe.label} />
-
-      <UncertaintyBanner flag={uncertainty} />
+      <StrategyPanel reasoning={strategy} />
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
         <div className="flex w-full shrink-0 flex-col md:w-56">

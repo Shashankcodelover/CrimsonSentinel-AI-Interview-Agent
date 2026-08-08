@@ -21,6 +21,7 @@ import { TurnScrubber } from "@/components/results/turn-scrubber";
 import { TranscriptExport } from "@/components/results/transcript-export";
 import { GapClosureTracker } from "@/components/results/gap-closure-tracker";
 import { BookmarkedMoments } from "@/components/results/bookmarked-moments";
+import { PressureMoments } from "@/components/results/pressure-moments";
 import { CoverageRadar } from "@/components/interview/coverage-radar";
 import { PrefsBar } from "@/components/shared/prefs-bar";
 import { loadBookmarks } from "@/lib/ui-prefs";
@@ -101,28 +102,6 @@ export default function ResultsPage() {
           </p>
         </motion.section>
 
-        <RubricMirror messages={session.messages} />
-
-        <CoverageRadar messages={session.messages} />
-
-        <RubricScorecard messages={session.messages} />
-
-        <SessionDiff messages={session.messages} />
-
-        <EvidenceQuotes messages={session.messages} />
-
-        <TurnScrubber messages={session.messages} bookmarks={bookmarks} />
-
-        <BookmarkedMoments
-          sessionId={session.sessionId}
-          messages={session.messages}
-        />
-
-        <GapClosureTracker
-          messages={session.messages}
-          finalGaps={feedback.gaps}
-        />
-
         <div className="grid grid-cols-1 gap-gutter md:grid-cols-12 print:gap-4">
           <StrengthsCard strengths={feedback.strengths} />
           <ScoreCard feedback={feedback} />
@@ -130,7 +109,35 @@ export default function ResultsPage() {
           <NextCard next={feedback.next} />
         </div>
 
-        <CounterfactualProbes messages={session.messages} />
+        <RubricMirror messages={session.messages} />
+
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-12">
+          <CoverageRadar messages={session.messages} />
+          <RubricScorecard messages={session.messages} />
+        </div>
+
+        <GapClosureTracker
+          messages={session.messages}
+          finalGaps={feedback.gaps}
+        />
+
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-12">
+          <PressureMoments messages={session.messages} />
+          <SessionDiff messages={session.messages} />
+        </div>
+
+        <EvidenceQuotes messages={session.messages} />
+
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2 md:gap-12">
+          <TurnScrubber messages={session.messages} bookmarks={bookmarks} />
+          <div className="space-y-8">
+            <BookmarkedMoments
+              sessionId={session.sessionId}
+              messages={session.messages}
+            />
+            <CounterfactualProbes messages={session.messages} />
+          </div>
+        </div>
 
         <TranscriptExport session={session} />
 

@@ -7,9 +7,9 @@ Last updated: 2026-08-08. For teammates, not judges. Rewrite in place — don’
 - Next.js app in `/frontend`: Landing `/`, Setup `/setup`, Interview `/interview`, Results `/results`.
 - Full click-through against **local mock** `POST /api/interview`.
 - **Try demo**, setup **Fill demo profile**, **Resume / View report** banner.
-- Interview: Probe Depth, Cadence, Memory Rail, Coverage Radar, Live Draft, Ghost Probe, Role Calibration, signal highlight, time arc, uncertainty, Structure Coach, Confidence Dial, Pace Meter, Sticky Notes, Moment Bookmarks, Focus Mode, Prefs.
-- Results: Rubric Mirror, Coverage Radar, Senior Scorecard, Session Diff, Evidence Quotes, Turn Scrubber, Bookmarks, Gap Closure, Counterfactuals, Markdown/JSON export, Copy/Print.
-- Landing: Judge demo script · Setup: Warm-up checklist · Global: Session health + `?` shortcuts.
+- Interview: Probe Depth, Cadence, Memory Rail, Coverage Radar, Live Draft, Ghost Probe, Role Calibration, signal highlight, time arc, uncertainty, Structure Coach, Confidence Dial, Pace Meter, Sticky Notes, Moment Bookmarks, Focus Mode, Prefs. **New:** Strategy Panel (all top diagnostics now grouped under a "Show Diagnostics" toggle for a cleaner console).
+- Results: Rubric Mirror, Coverage Radar, Senior Scorecard, Session Diff, Evidence Quotes, Turn Scrubber, Bookmarks, Gap Closure, Counterfactuals, Markdown/JSON export, Copy/Print. **New:** Pressure Moment Highlights. Page layout restructured into 2-column grids for better cohesion.
+- Landing: Judge demo script · Setup: Warm-up checklist · Global: Session health + `?` shortcuts. Landing page simplified (removed redundant demo/prefs footer).
 - Feature map: **`frontend/features/`** (+ `TIER-NEXT.md`, `CONNECT.md`).
 - Active branch: **`feature/next-level`** — **never push/merge to main unless asked**.
 - Checks: `npm run typecheck && npm run lint && npm test && npm run build`.

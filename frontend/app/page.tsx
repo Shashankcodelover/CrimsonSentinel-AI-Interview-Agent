@@ -15,8 +15,6 @@ import {
   type SessionStatus,
 } from "@/lib/session";
 import { cn } from "@/lib/utils";
-import { JudgeDemoScript } from "@/components/landing/judge-demo-script";
-import { PrefsBar } from "@/components/shared/prefs-bar";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -241,17 +239,6 @@ export default function LandingPage() {
           </div>
         </section>
 
-        <section className="relative border-t border-secondary-container bg-level-0 py-16">
-          <div className="mx-auto max-w-container-max space-y-6 px-margin-mobile md:px-margin-desktop">
-            <div className="flex flex-wrap items-center justify-between gap-3">
-              <h2 className="font-headline text-headline-lg text-on-surface">
-                Demo &amp; prefs
-              </h2>
-              <PrefsBar />
-            </div>
-            <JudgeDemoScript />
-          </div>
-        </section>
       </main>
 
       <SiteFooter />
