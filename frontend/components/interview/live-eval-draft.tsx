@@ -11,7 +11,10 @@ type Props = {
 
 export function LiveEvalDraft({ signals, ghostProbe }: Props) {
   return (
-    <div className="border-t border-border-low bg-level-0/80 px-3 py-2 md:px-4">
+    <div
+      className="border-t border-border-low bg-level-0/80 px-3 py-2 md:px-4"
+      aria-label="Live evaluation draft"
+    >
       <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
         <span className="font-label text-label-caps uppercase text-muted-foreground">
           Live draft
