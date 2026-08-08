@@ -114,6 +114,7 @@ Status: **shipped on `feature/next-level`** — Probe Depth, Memory Rail (+ topi
 - Counterfactual Probes on results  
 - Session Diff View on results  
 - Probe Cadence spine (Q1–Q6 soft arc)  
+- Answer Structure Coach (claim / mechanism / tradeoff / failure)  
 
 ---
 
