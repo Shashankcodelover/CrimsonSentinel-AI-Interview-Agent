@@ -21,6 +21,7 @@ import { ProbeDepthMeter } from "@/components/interview/probe-depth-meter";
 import { MemoryRail } from "@/components/interview/memory-rail";
 import { LiveEvalDraft } from "@/components/interview/live-eval-draft";
 import { RoleCalibrationStrip } from "@/components/interview/role-calibration-strip";
+import { SignalHighlight } from "@/components/interview/signal-highlight";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -306,7 +307,11 @@ export default function InterviewPage() {
                         : "border-primary-container/40 bg-level-1"
                     )}
                   >
-                    {msg.content}
+                    {msg.role === "candidate" ? (
+                      <SignalHighlight text={msg.content} />
+                    ) : (
+                      msg.content
+                    )}
                   </div>
                 </motion.article>
               ))}
