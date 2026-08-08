@@ -3,13 +3,263 @@
 ## Prompt 1
 
 ### Tool Used
+Cursor Agent (Composer) + create-next-app + shadcn CLI
 
 ### Purpose
+Scaffold Next.js (App Router) + TypeScript + Tailwind + shadcn/ui + Framer Motion inside `/frontend`, with design tokens from Stitch reference and production font/config setup (next/font, tailwind.config.ts).
 
 ### Prompt
+Scaffold a Next.js (App Router) + TypeScript + Tailwind + shadcn/ui + Framer Motion app inside /frontend using design-reference as visual source of truth; only touch /frontend; append PROMPTS.md; build one screen at a time starting with landing.
 
 ### Output Summary
+Created Next.js 15 app in `/frontend` (kept `design-reference/`). Installed Framer Motion and initialized shadcn/ui (button, input, label, textarea, card, progress, badge, separator). Added `tailwind.config.ts` + Crimson design tokens in `globals.css`, next/font for IBM Plex Serif / Inter / JetBrains Mono, shared SiteHeader/SiteFooter (footer year 2026), and Landing page at `/`.
 
 ### Manual Changes
+None yet.
 
 ### Timestamp
+2026-08-08T11:50:00+05:30
+
+## Prompt 2
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Build and verify the Landing page against the Stitch design system (brand-first hero, dark surfaces, crimson accents, editorial typography).
+
+### Prompt
+Build Landing page using Stitch reference for style; show it working before moving to the next screen.
+
+### Output Summary
+Landing page at `/` with brand-level "Crimson Sentinel" hero, supporting sentence, dual CTAs, atmospheric radial/grid background, Platform + Process sections with Framer Motion fade-ups, and shared header/footer. Fixed Tailwind `@apply dark` crash.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T11:55:00+05:30
+
+## Prompt 3
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Fix WCAG AA contrast for brand text on dark backgrounds (deep crimson `#991b1b` failed as large text; switched brand/accent text to Stitch coral `#ffb4ac`).
+
+### Prompt
+Check text contrast against the dark background meets WCAG AA.
+
+### Output Summary
+Introduced `text-brand` (`#ffb4ac`) for logo/hero/report accents; kept solid `#991b1b` for primary button fills with white text. Brightened `on-surface-variant` to `#f0d4d0` for body secondary text.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:00:00+05:30
+
+## Prompt 4
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Build Candidate setup screen collecting id, name, jobRole, yearsExperience, education; persist session and route to interview.
+
+### Prompt
+Build candidate setup screen (candidate: id, name, jobRole, yearsExperience, education).
+
+### Output Summary
+Added `/setup` form with Stitch technical inputs, validation, `lib/session.ts` (sessionStorage), and navigation to `/interview`.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:05:00+05:30
+
+## Prompt 5
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Build Interview console + mock POST `/api/interview` with start/turn/end contract, thinking state, question count, autosizing monospace textarea (no fake line numbers).
+
+### Prompt
+Interview console — sends message, receives reply, tracks question count, shows thinking state; mock API at /frontend/app/api/interview/route.ts; no literal synced line numbers.
+
+### Output Summary
+Implemented `/interview` console and `app/api/interview/route.ts` mock (start/turn/end + feedback). Thinking pulse while awaiting API; autosizing `Textarea` with monospace editor look; End Interview path.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:10:00+05:30
+
+## Prompt 6
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Build Results / feedback report from session feedback (summary, strengths[], gaps[], next[]) matching Stitch report layout.
+
+### Prompt
+Results / feedback report — renders summary, strengths[], gaps[], next[].
+
+### Output Summary
+Implemented `/results` with Stitch-style bento: strengths, aggregate score bars, development areas, next steps; footer year 2026; Framer Motion section fades. Verified full flow Landing → Setup → Interview (thinking + Q count) → Results against mock API.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:15:00+05:30
+
+## Prompt 8
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Harden mock API for deploy (stateless/serverless), support 4–5+ answers before end, empty/long answer handling, and document frontend deploy steps before push.
+
+### Prompt
+Full flow QA checklist + push frontend branch to GitHub for deploy readiness.
+
+### Output Summary
+Mock API now client-driven (candidate + turn on each request) so Vercel serverless works. Raised max turns to 6; empty-answer validation + long-message truncate; frontend README with Vercel root=`frontend`.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:00:00+05:30
+
+## Prompt 9
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+User asked to NOT push yet — analyse/upgrade/test the frontend against a full judge-style checklist, fix logging style for PROMPTS.md, and add TEAM_NOTES.md for teammates. Push deferred to next message.
+
+### Prompt
+Push the company code to this repo "https://github.com/ULLAS-7/CrimsonSentinel-AI-Interview-Agent.git" With standard form By making the branch of front end Start meeting the professional way and push all of them before pushing cheque out all the things of working correctly Cheque to the testing whether the distinct which satisfies or not " Full flow once, start to finish: Landing → Start → Setup form submit → Interview (send at least 4–5 answers) → End → Results renders all four feedback fields
+ Refresh the page mid-interview — confirm it doesn't hard-crash (fine if it just restarts, not fine if it white-screens)
+ Resize browser to phone width (or open on your actual phone) — recheck the screens you fixed for hydration/contrast still hold up narrow
+ Submit an empty answer and a very long answer in the interview textarea — confirm the mock doesn't choke
+ Open the live URL in an incognito/private window — this is close to what a judge does on a cold, un-cached first visit
+ Check the browser console for errors on each screen — a clean console matters more than it seems for a technical judge glancing at devtools" I need the fully working Website able to push on the Github so I can able to deploy  And make sure to follow the prompt initial prompt and make sure to update the files which has been mentioned earlier without ending the things As of now just analyse the things and upgrade the project and test them And you can also give maintain the file that should give the guide for the member 2 Or the backend or any Other things so they can able to mai....e familiar thing for the other agents and fallow this "Update how you log to /PROMPTS.md from now on..." Also create TEAM_NOTES.md ... and next i will give in next response
+
+### Output Summary
+Starting analysis + QA pass now. Will not push/create remote branch until the user's next message. Noticed Prompt 7 was skipped earlier (Prompt 8 already exists) — leaving history alone, appending only. Noticed mock API already looks serverless-hardened (candidate+turn on each request, max turns 6) from a prior pass — verifying that still matches the interview client before claiming green.
+
+### Manual Changes
+None yet this turn.
+
+### Timestamp
+2026-08-08T12:10:46+05:30
+
+## Prompt 10
+
+### Tool Used
+Cursor Agent (Composer) + PowerShell Invoke-RestMethod
+
+### Purpose
+Log a real QA failure discovered mid-checklist — not a feature request.
+
+### Prompt
+(Internal QA while executing user's checklist from Prompt 9)
+
+### Output Summary
+FAILED: ran 
+pm run build while 
+pm run dev (turbopack) was still up. Build rewrote .next/ and the dev server started returning 500 ENOENT on /api/interview (missing build-manifest / app-paths-manifest). Dev process exited. Fix: restart 
+pm run dev cleanly, then re-run API + browser checklist. Also noting MODULE_TYPELESS_PACKAGE_JSON warning on 	ailwind.config.ts — will add "type": "module" if it doesn't break Next.
+
+### Manual Changes
+None yet — restarting server next.
+
+### Timestamp
+2026-08-08T12:14:29+05:30
+
+## Prompt 11
+
+### Tool Used
+Cursor Agent (Composer) + browser CDP + PowerShell API calls + 
+pm run build
+
+### Purpose
+Finish the judge-style QA checklist from Prompt 9 (no GitHub push yet), write TEAM_NOTES.md, log what actually passed/failed.
+
+### Prompt
+(Continuation of Prompt 9 — analyse / upgrade / test; push deferred to next user message)
+
+### Output Summary
+QA results after fixing the dead dev server from Prompt 10:
+- PASS production build (
+pm run build)
+- PASS empty message → API 400 message cannot be empty; UI shows alert "Answer cannot be empty..."
+- PASS ~25k char long message → mock replies (truncates payload server-side)
+- PASS API 5 turns + end → feedback has summary + strengths(3) + gaps(2) + next(3)
+- PASS UI mid-interview refresh → restored Q count / transcript, no white screen
+- PASS phone-width (390px) landing/results — brand coral still readable, hamburger nav, no layout blowup
+- PASS cold visit (cleared storage) landing + setup; /interview with no session redirects to /setup
+- PASS full UI path to /results with all four feedback fields present in DOM text
+- Added rontend/TEAM_NOTES.md for teammates/backend
+- Added "type": "module" to frontend package.json to quiet the tailwind.config.ts module warning
+- DID NOT push / create frontend branch yet — waiting on user's next message as they said
+
+### Manual Changes
+None from user. Agent-only: TEAM_NOTES.md, package.json type module, PROMPTS appends.
+
+### Timestamp
+2026-08-08T12:19:22+05:30
+
+## Prompt 12
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Rewrite TEAM_NOTES.md for teammates with exact sections requested; stay out of backend design; document mock + one shared POST contract; wire NEXT_PUBLIC_INTERVIEW_API_URL so the "one env var swap" claim is real. No push.
+
+### Prompt
+"Create /frontend/TEAM_NOTES.md now, populated with the real current state of the frontend based on everything built so far (Prompts 1-7 in /PROMPTS.md). This file is for teammates, not judges — plain, direct language, no formal template.
+SCOPE — STAY OUT OF BACKEND ... Only describe the frontend, and the ONE place it touches the backend: the POST /api/interview contract...
+WRITE THESE SECTIONS: What works / What's not done / How to run / The one shared contract / What the next person should do / Notes...
+Just tell me All the project or entire website of this front end part is ready and testable... And ready for And just cumulative conversation and I will tell when to push... After pushing before deploying Whether we can able to Say our entire project or entire website fully workable to other members far from our Al Ngero is best NG Rock But there is a issue we can able to save only one link But other other pages will not be loaded..."
+
+### Output Summary
+Rewrote frontend/TEAM_NOTES.md to the requested sections only (no backend implementation advice). Noted docs/technical-spec/ is empty so contract is the shared POST shape we built against. Added NEXT_PUBLIC_INTERVIEW_API_URL in lib/interview-api.ts + .env.example so swapping off the mock is actually one env var. Did not push.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:26:35+05:30
+
+## Prompt 13
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+User said push now — commit the staged frontend work on branch rontend and push remotely in a clean, professional way.
+
+### Prompt
+OK you can push it out Will well structured manner
+
+### Output Summary
+About to commit all staged frontend scaffolding + screens + mock API + TEAM_NOTES/PROMPTS on branch rontend, then push. Noted origin currently points at Shashankcodelover/CrimsonSentinel-AI-Interview-Agent; will also push to ULLAS-7 URL from earlier ask if accessible.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:32:44+05:30
