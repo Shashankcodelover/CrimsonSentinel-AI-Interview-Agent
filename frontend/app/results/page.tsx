@@ -12,6 +12,7 @@ import { formatReportText } from "@/lib/demo";
 import { clearSession, loadSession } from "@/lib/session";
 import type { Feedback, InterviewSessionState } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { RubricMirror } from "@/components/results/rubric-mirror";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -83,6 +84,8 @@ export default function ResultsPage() {
             {candidate.education}
           </p>
         </motion.section>
+
+        <RubricMirror messages={session.messages} />
 
         <div className="grid grid-cols-1 gap-gutter md:grid-cols-12 print:gap-4">
           <StrengthsCard strengths={feedback.strengths} />
