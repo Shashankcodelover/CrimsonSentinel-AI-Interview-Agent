@@ -6,10 +6,20 @@ import { motion, AnimatePresence } from "framer-motion";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Textarea } from "@/components/ui/textarea";
 import { formatElapsed } from "@/lib/demo";
+import {
+  getDraftSignals,
+  getGhostProbe,
+  getMemoryChips,
+  getProbeDepth,
+  getTopics,
+} from "@/lib/interview-insights";
 import { postInterview } from "@/lib/interview-api";
 import { loadSession, saveSession, updateSessionFeedback } from "@/lib/session";
 import type { InterviewMessage, InterviewSessionState } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { ProbeDepthMeter } from "@/components/interview/probe-depth-meter";
+import { MemoryRail } from "@/components/interview/memory-rail";
+import { LiveEvalDraft } from "@/components/interview/live-eval-draft";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -207,6 +217,12 @@ export default function InterviewPage() {
     );
   }
 
+  const probe = getProbeDepth(session.questionCount, session.messages);
+  const memoryChips = getMemoryChips(session.candidate, session.messages);
+  const topics = getTopics(session.messages);
+  const draftSignals = getDraftSignals(session.messages);
+  const ghostProbe = getGhostProbe(session.messages, session.questionCount);
+
   return (
     <div className="flex h-svh flex-col overflow-hidden bg-level-0">
       <SiteHeader />
@@ -257,7 +273,11 @@ export default function InterviewPage() {
         />
       </div>
 
+      <ProbeDepthMeter pct={probe.pct} label={probe.label} />
+
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
+        <MemoryRail chips={memoryChips} topics={topics} />
+
         <section className="min-h-0 flex-1 overflow-y-auto border-b border-border-low md:border-b-0 md:border-r">
           <div className="space-y-6 p-4 md:p-6">
             <AnimatePresence initial={false}>
@@ -308,7 +328,7 @@ export default function InterviewPage() {
           </div>
         </section>
 
-        <section className="flex w-full flex-col bg-level-1 md:w-[44%]">
+        <section className="flex w-full flex-col bg-level-1 md:w-[40%]">
           <div className="flex items-center justify-between border-b border-border-low px-4 py-2">
             <span className="font-label text-label-caps uppercase text-muted-foreground">
               Answer
@@ -317,7 +337,7 @@ export default function InterviewPage() {
               {wordCount} words · monospace
             </span>
           </div>
-          <div className="flex flex-1 flex-col p-3">
+          <div className="flex min-h-0 flex-1 flex-col p-3">
             <Textarea
               ref={textareaRef}
               value={draft}
@@ -330,7 +350,7 @@ export default function InterviewPage() {
                   void sendMessage();
                 }
               }}
-              className="min-h-[160px] flex-1 resize-none rounded-sm border-0 bg-[#0f0f0f] p-4 font-code text-code-md leading-[22px] text-on-surface shadow-none placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary-container/50 md:min-h-[240px] md:text-code-md"
+              className="min-h-[120px] flex-1 resize-none rounded-sm border-0 bg-[#0f0f0f] p-4 font-code text-code-md leading-[22px] text-on-surface shadow-none placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary-container/50 md:min-h-[180px] md:text-code-md"
             />
             {error && (
               <p role="alert" className="mt-2 font-code text-code-md text-error">
@@ -351,6 +371,7 @@ export default function InterviewPage() {
               </button>
             </div>
           </div>
+          <LiveEvalDraft signals={draftSignals} ghostProbe={ghostProbe} />
         </section>
       </div>
 

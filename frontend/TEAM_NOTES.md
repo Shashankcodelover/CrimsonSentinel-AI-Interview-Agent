@@ -4,14 +4,14 @@ Last updated: 2026-08-08. For teammates, not judges. Rewrite in place — don’
 
 ## What works right now
 
-- Next.js app in `/frontend` only: Landing `/`, Setup `/setup`, Interview `/interview`, Results `/results`.
-- Full click-through works against a **local mock**: Setup → Interview (send answers, thinking state, question count, End) → Results shows `summary`, `strengths[]`, `gaps[]`, `next[]`.
-- **Try demo** on landing (skips form with a demo candidate). **Fill demo profile** on setup. **Resume / View report** banner if a session exists in this browser tab.
-- Interview extras: elapsed timer, end confirmation modal, word count, autofocus after replies, `aria-live` thinking state.
-- Results: **Copy report** + **Print** (actions hidden when printing).
-- Mock at `/frontend/app/api/interview/route.ts` — temporary, not Member 2’s backend.
-- Session in `sessionStorage`. Refresh mid-interview restores transcript.
-- Stitch-based dark UI, footer year 2026. `npm run build` succeeds. Phone-width spot-checked.
+- Next.js app in `/frontend`: Landing `/`, Setup `/setup`, Interview `/interview`, Results `/results`.
+- Full click-through against **local mock** `POST /api/interview`.
+- **Try demo**, setup **Fill demo profile**, **Resume / View report** banner.
+- Interview: elapsed timer, end confirmation, word count, autofocus, aria-live.
+- Results: Copy report + Print.
+- **Tier A (feature/next-level):** Probe Depth Meter · Adaptive Memory Rail (preview · local) with topic lights · Live Evaluation Draft chips · Ghost Next Probe line. All frontend heuristics — labeled so judges know it’s not live Breeth yet.
+- Repo target: **https://github.com/ULLAS-7/CrimsonSentinel-AI-Interview-Agent.git** only (`frontend` already merged to `main` via PR #1).
+- See `frontend/FEATURES.md` for brainstorm / Tier B+C.
 
 ## What's not done / known gaps
 

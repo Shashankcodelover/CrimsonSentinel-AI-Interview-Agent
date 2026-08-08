@@ -327,3 +327,83 @@ None.
 
 ### Timestamp
 2026-08-08T13:07:14+05:30
+
+## Prompt 17
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Brainstorm 14 high-signal Crimson Sentinel features, tier A/B/C, write FEATURES.md. No Tier A code in this entry yet.
+
+### Prompt
+(Same as Prompt 16 user message — brainstorm + tier + FEATURES.md + build Tier A + log)
+
+### Output Summary
+Created frontend/FEATURES.md with 14 ideas, specs (pitch/judge/frontend-vs-backend/effort/risk), Tier A (Probe Depth, Memory Rail, Live Evaluation Draft, Ghost Next Probe), Tier B roadmap, Tier C flagged for Member 2 (no new endpoints). Branch feature/next-level active with baseline merged from frontend.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:07:58+05:30
+
+## Prompt 18
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Build Tier A #1 — Probe Depth Meter — show working before next Tier A feature.
+
+### Prompt
+TASK 5 — Build Tier A only... Probe Depth Meter first.
+
+### Output Summary
+Added lib/interview-insights.ts and ProbeDepthMeter in interview chrome. Depth label moves Opening → Calibrating → Pressure rising → Deep probe. Updated TEAM_NOTES. Baseline flow unchanged.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:08:53+05:30
+
+## Prompt 19
+
+### Tool Used
+Cursor Agent (Composer) + git remote
+
+### Purpose
+Align remotes to ULLAS-7 only (frontend already merged to main there), continue Tier A #2–4 (Memory Rail, Live Draft, Ghost Next Probe), then push feature/next-level to that repo.
+
+### Prompt
+https://github.com/ULLAS-7/CrimsonSentinel-AI-Interview-Agent.git For this repo you want to contribute Already dsa one branch of front end and you said somewhere there is no front end that's been not merged cheque out that deletes already exist and for this and according to that you want to work on the things and you can able to go with the type 2 and at hand you want to Make all the project all the folders should be updated to the same repo not any other repo ok be aware of this and you can start And I think it's already merged to the front end branch Ok you can continue
+
+### Output Summary
+Confirmed origin/main on ULLAS-7 includes frontend via PR #1 merge. Removed Shashankcodelover as origin; origin now only ULLAS-7. Built Memory Rail + topic lights, Live Evaluation Draft, Ghost Next Probe into interview console (still labeled Preview/local). Updated FEATURES.md + TEAM_NOTES. Next: commit + push feature/next-level to ULLAS-7.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:18:24+05:30
+
+## Prompt 20
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+User clarified: keep Tier A work on a separate branch; do not merge or touch main. Commit + push feature/next-level only to ULLAS-7.
+
+### Prompt
+don't merge for main as of now maintain a new brach and continue don't touch main branch
+
+### Output Summary
+Staying on feature/next-level. Committing FEATURES.md + Tier A UI (probe depth, memory rail, live draft, ghost probe) and pushing only that branch to origin (ULLAS-7). No checkout of main, no merge into main, no force updates to main.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:19:47+05:30
