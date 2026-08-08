@@ -55,6 +55,10 @@ type InterviewResponseExtras = {
 
   // Probe Depth (0–100) if Breeth scores intensity
   probeDepthPct?: number;
+
+  // Tier Next — optional scorecard / radar
+  axisScores?: { id: string; label: string; score: number; note?: string }[];
+  topicWeights?: { id: string; label: string; value: number }[];
 };
 ```
 
@@ -85,7 +89,8 @@ type InterviewResponseExtras = {
 | Probe Depth | Yes (local) | `probeDepthPct` |
 | Role Calibration | Yes | Uses `candidate` from start — already wired |
 | Results report body | Yes | Final `feedback` on end — already wired |
-| Session Diff / Structure Coach / Signal highlight / Cadence / Time arc | Yes | Frontend-only; no API change |
+| Session Diff / Structure Coach / Signal highlight / Cadence / Time arc / Sticky notes / Bookmarks / Export / Focus / Shortcuts / Warm-up / Pace / Health | Yes | Frontend-only; no API change |
+| Coverage Radar / Rubric Scorecard / Gap Closure | Yes (local) | Optional `topicWeights` / `axisScores` |
 
 ---
 

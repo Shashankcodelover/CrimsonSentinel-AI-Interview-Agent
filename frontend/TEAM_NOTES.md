@@ -7,19 +7,19 @@ Last updated: 2026-08-08. For teammates, not judges. Rewrite in place — don’
 - Next.js app in `/frontend`: Landing `/`, Setup `/setup`, Interview `/interview`, Results `/results`.
 - Full click-through against **local mock** `POST /api/interview`.
 - **Try demo**, setup **Fill demo profile**, **Resume / View report** banner.
-- Interview: timer, end confirm, word count, autofocus, Probe Depth, **Probe Cadence**, Memory Rail (preview), Live Draft, Ghost Next Probe, Role Calibration, signal-term highlighting, soft time arc, low-signal banner, **Structure Coach**.
-- Results: Copy/Print, **Console → Report bridge**, **What changed since Q1**, **Evidence quote pins**, **Probes we didn’t ask**.
-- Feature map for teammates: **`frontend/features/`** (index + per-feature READMEs) and **`frontend/features/CONNECT.md`** for Member 2 wiring.
-- Active branch for new work: **`feature/next-level`** on https://github.com/ULLAS-7/CrimsonSentinel-AI-Interview-Agent.git — **never push/merge to main unless asked**; commit often on this branch.
-- Checks: `npm run typecheck && npm run lint && npm test && npm run build` from `/frontend`.
-- See `frontend/FEATURES.md`.
+- Interview: Probe Depth, Cadence, Memory Rail, Coverage Radar, Live Draft, Ghost Probe, Role Calibration, signal highlight, time arc, uncertainty, Structure Coach, Confidence Dial, Pace Meter, Sticky Notes, Moment Bookmarks, Focus Mode, Prefs.
+- Results: Rubric Mirror, Coverage Radar, Senior Scorecard, Session Diff, Evidence Quotes, Turn Scrubber, Bookmarks, Gap Closure, Counterfactuals, Markdown/JSON export, Copy/Print.
+- Landing: Judge demo script · Setup: Warm-up checklist · Global: Session health + `?` shortcuts.
+- Feature map: **`frontend/features/`** (+ `TIER-NEXT.md`, `CONNECT.md`).
+- Active branch: **`feature/next-level`** — **never push/merge to main unless asked**.
+- Checks: `npm run typecheck && npm run lint && npm test && npm run build`.
 
 ## What's not done / known gaps
 
 - No real backend wired yet — mock only.
 - Footer nav links are dead `#` placeholders.
-- Results aggregate score bars are UI-only (derived client-side), not from the API.
-- `docs/technical-spec/` folder is empty in-repo; contract below is what we build against.
+- Results aggregate score bars + Tier Next scorecard are UI-only (derived client-side).
+- Tier C (real Breeth confidence heat + follow-up graph) needs Member 2.
 - Don’t run `npm run build` while `npm run dev` shares the same `.next` folder.
 
 ## How to run this locally
@@ -48,13 +48,14 @@ Only shared surface. Frontend uses the local mock until you set `NEXT_PUBLIC_INT
 
 **End** → `{ "reply", "done": true, "feedback": { "summary", "strengths": [], "gaps": [], "next": [] } }`
 
-Local mock may also accept extra fields (`turn`, `candidate`) for serverless convenience. Shared shape above is what we align on. Send Preetham the deployed URL when ready — no other coordination needed.
+Local mock may also accept extra fields (`turn`, `candidate`) for serverless convenience. Shared shape above is what we align on. See `frontend/features/CONNECT.md` for optional additive fields.
 
 ## What the next person should do
 
-1. Click **Try demo** and walk Landing → Interview → End → Results.
+1. Click **Try demo** and walk Landing → Interview → End → Results (use Judge demo script).
 2. Member 2: match the contract; give frontend the URL for `NEXT_PUBLIC_INTERVIEW_API_URL`.
 3. Frontend: don’t turn the mock into a real backend — swap the env URL only.
+4. Prefer server `memoryHints` when ready; keep Preview · local until then.
 
 ## Notes / decisions worth knowing
 

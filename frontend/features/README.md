@@ -7,9 +7,10 @@ This folder is the teammate map of what the frontend has built, where the code l
 | Doc | Audience |
 |-----|----------|
 | [CONNECT.md](./CONNECT.md) | Member 2 — how to plug real API signals into existing UI |
+| [TIER-NEXT.md](./TIER-NEXT.md) | Plan for the 15 IA-upgrade features |
 | Per-feature `README.md` folders below | Anyone — status, files, local vs backend |
 
-## Quick status
+## Quick status — baseline + Tier A/B
 
 | Feature | Status | Needs backend? |
 |---------|--------|----------------|
@@ -27,6 +28,26 @@ This folder is the teammate map of what the frontend has built, where the code l
 | [session-diff](./session-diff/) | Shipped | No |
 | [counterfactual-probes](./counterfactual-probes/) | Shipped (templates) | Optional |
 | [evidence-quotes](./evidence-quotes/) | Shipped (preview) | Optional |
+
+## Quick status — Tier Next (15 IA features)
+
+| Feature | Status | Needs backend? |
+|---------|--------|----------------|
+| [coverage-radar](./coverage-radar/) | Shipped (preview) | Optional topic weights |
+| [rubric-scorecard](./rubric-scorecard/) | Shipped (preview) | Optional axis scores |
+| [sticky-notes](./sticky-notes/) | Shipped | No |
+| [confidence-dial](./confidence-dial/) | Shipped | Optional persist on turn |
+| [turn-scrubber](./turn-scrubber/) | Shipped | No |
+| [moment-bookmarks](./moment-bookmarks/) | Shipped | No |
+| [transcript-export](./transcript-export/) | Shipped | No |
+| [focus-mode](./focus-mode/) | Shipped | No |
+| [judge-demo-script](./judge-demo-script/) | Shipped | No |
+| [session-health](./session-health/) | Shipped | No |
+| [pace-meter](./pace-meter/) | Shipped | Optional latency signals |
+| [keyboard-shortcuts](./keyboard-shortcuts/) | Shipped | No |
+| [gap-closure](./gap-closure/) | Shipped (preview) | Optional |
+| [reduce-motion](./reduce-motion/) | Shipped | No |
+| [warmup-checklist](./warmup-checklist/) | Shipped | No |
 | memory-confidence-heat | **Not built** — Tier C | **Required** |
 | adaptive-follow-up-graph | **Not built** — Tier C | **Required** |
 

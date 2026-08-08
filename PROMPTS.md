@@ -492,3 +492,23 @@ None.
 
 ### Timestamp
 2026-08-08T13:45:00+05:30
+
+## Prompt 25
+
+### Tool Used
+Cursor Agent (Composer) + vitest + Next.js build + git
+
+### Purpose
+Take frontend to next IA level: ship 15 unique essential features, keep PROMPTS/docs in exact standard format, test A–Z, push only to feature/next-level (never main).
+
+### Prompt
+Hello Yeah your job is to Take this project to the next ia level focusing only on the front end Focusing only on the front end and adding much more features and meeting all the documents even the prompt log or anything in the standard format not only on the standard format some ugly format according to the prompt I have pasted earlier at the exact format carry out all the documents regarding the features what we are going to do all the things just upgrade the project add more features add some more 10 to 15 unique features and test A to Z all the features all the web pages all the features and functions whether all the functions or features we have been added whether it is working individually all of them want to cheque and we want to test them and after testing just upload it And ticket thing what are the project we go are going to do you want to think about that and add on very useful And very useful and efficient and very essential features to the platform please update it and then push it to the thing But think you should add a very exciting and very essential features please update it
+
+### Output Summary
+Shipped 15 Tier Next frontend features (radar, scorecard, notes, confidence, scrubber, bookmarks, export, focus, demo script, session health, pace, shortcuts, gap closure, reduce motion, warm-up). Updated features/ catalog + TIER-NEXT.md + CONNECT + TEAM_NOTES + FEATURES + PROMPTS (exact format). Checks: typecheck/lint/19 tests/build green. Pushed to origin/feature/next-level only — main untouched.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T16:26:00+05:30

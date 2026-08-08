@@ -161,5 +161,8 @@ Talking points for Member 2:
 |-------|--------|
 | **Shipped baseline** | Landing, Setup, Interview, Results, mock API, demo/timer/copy/print |
 | **Shipped Tier A + follow-ons** | Probe Depth, Probe Cadence, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Structure Coach, Rubric Mirror, Counterfactuals, Session Diff, Evidence Quotes |
+| **Shipped Tier Next (15)** | Coverage Radar, Rubric Scorecard, Sticky Notes, Confidence Dial, Turn Scrubber, Moment Bookmarks, Transcript Export, Focus Mode, Judge Demo Script, Session Health, Pace Meter, Keyboard Shortcuts, Gap Closure, Reduce Motion, Warm-up Checklist |
 | **Roadmap (Tier B remaining)** | Polish / judge-demo hardening only — core Tier B items shipped |
 | **Backend-gated (Tier C)** | Real Breeth confidence + follow-up graph |
+
+See `frontend/features/TIER-NEXT.md` for the Tier Next pitch table and `frontend/features/` for per-feature connect notes.
