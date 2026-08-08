@@ -22,6 +22,7 @@ import { MemoryRail } from "@/components/interview/memory-rail";
 import { LiveEvalDraft } from "@/components/interview/live-eval-draft";
 import { RoleCalibrationStrip } from "@/components/interview/role-calibration-strip";
 import { SignalHighlight } from "@/components/interview/signal-highlight";
+import { TimePressureArc } from "@/components/interview/time-pressure-arc";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -268,14 +269,7 @@ export default function InterviewPage() {
 
       <RoleCalibrationStrip candidate={session.candidate} />
 
-      <div className="h-0.5 w-full bg-level-1">
-        <div
-          className="h-full bg-primary-container transition-all duration-500"
-          style={{
-            width: `${Math.min(100, (session.questionCount / 6) * 100)}%`,
-          }}
-        />
-      </div>
+      <TimePressureArc elapsedSeconds={elapsed} />
 
       <ProbeDepthMeter pct={probe.pct} label={probe.label} />
 
