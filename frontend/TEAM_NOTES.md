@@ -8,8 +8,10 @@ Last updated: 2026-08-08. For teammates, not judges. Rewrite in place — don’
 - Full click-through against **local mock** `POST /api/interview`.
 - **Try demo**, setup **Fill demo profile**, **Resume / View report** banner.
 - Interview: timer, end confirm, word count, autofocus, Probe Depth, **Probe Cadence**, Memory Rail (preview), Live Draft, Ghost Next Probe, Role Calibration, signal-term highlighting, soft time arc, low-signal banner, **Structure Coach**.
-- Results: Copy/Print, **Console → Report bridge**, **What changed since Q1**, **Probes we didn’t ask**.
+- Results: Copy/Print, **Console → Report bridge**, **What changed since Q1**, **Evidence quote pins**, **Probes we didn’t ask**.
+- Feature map for teammates: **`frontend/features/`** (index + per-feature READMEs) and **`frontend/features/CONNECT.md`** for Member 2 wiring.
 - Active branch for new work: **`feature/next-level`** on https://github.com/ULLAS-7/CrimsonSentinel-AI-Interview-Agent.git — **never push/merge to main unless asked**; commit often on this branch.
+- Checks: `npm run typecheck && npm run lint && npm test && npm run build` from `/frontend`.
 - See `frontend/FEATURES.md`.
 
 ## What's not done / known gaps

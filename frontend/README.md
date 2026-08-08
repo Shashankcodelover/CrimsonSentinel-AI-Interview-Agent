@@ -48,3 +48,15 @@ npx vercel
 - Session state is stored in `sessionStorage` for the mock flow.
 - Design tokens follow `frontend/design-reference/`.
 - Footer year is 2026; fonts via `next/font` (IBM Plex Serif, Inter, JetBrains Mono).
+- **Feature catalog for teammates:** [`features/README.md`](./features/README.md) + backend wiring [`features/CONNECT.md`](./features/CONNECT.md).
+- Active work branch: `feature/next-level` (do not push to `main` unless asked).
+
+## Checks
+
+```bash
+cd frontend
+npm run typecheck
+npm run lint
+npm test
+npm run build
+```

@@ -115,6 +115,9 @@ Status: **shipped on `feature/next-level`** — Probe Depth, Memory Rail (+ topi
 - Session Diff View on results  
 - Probe Cadence spine (Q1–Q6 soft arc)  
 - Answer Structure Coach (claim / mechanism / tradeoff / failure)  
+- Evidence Quote Pins on results  
+
+Teammate catalog: **`frontend/features/`** · Connect guide: **`frontend/features/CONNECT.md`**.
 
 ---
 
@@ -157,6 +160,6 @@ Talking points for Member 2:
 | State | Items |
 |-------|--------|
 | **Shipped baseline** | Landing, Setup, Interview, Results, mock API, demo/timer/copy/print |
-| **Shipped Tier A + follow-ons** | Probe Depth, Probe Cadence, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Rubric Mirror, Counterfactuals, Session Diff |
+| **Shipped Tier A + follow-ons** | Probe Depth, Probe Cadence, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Time Arc, Uncertainty Flags, Structure Coach, Rubric Mirror, Counterfactuals, Session Diff, Evidence Quotes |
 | **Roadmap (Tier B remaining)** | Polish / judge-demo hardening only — core Tier B items shipped |
 | **Backend-gated (Tier C)** | Real Breeth confidence + follow-up graph |
