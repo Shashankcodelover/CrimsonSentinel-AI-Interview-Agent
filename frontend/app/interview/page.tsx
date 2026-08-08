@@ -12,6 +12,7 @@ import {
   getMemoryChips,
   getProbeDepth,
   getTopics,
+  getUncertaintyFlag,
 } from "@/lib/interview-insights";
 import { postInterview } from "@/lib/interview-api";
 import { loadSession, saveSession, updateSessionFeedback } from "@/lib/session";
@@ -23,6 +24,7 @@ import { LiveEvalDraft } from "@/components/interview/live-eval-draft";
 import { RoleCalibrationStrip } from "@/components/interview/role-calibration-strip";
 import { SignalHighlight } from "@/components/interview/signal-highlight";
 import { TimePressureArc } from "@/components/interview/time-pressure-arc";
+import { UncertaintyBanner } from "@/components/interview/uncertainty-banner";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -225,6 +227,7 @@ export default function InterviewPage() {
   const topics = getTopics(session.messages);
   const draftSignals = getDraftSignals(session.messages);
   const ghostProbe = getGhostProbe(session.messages, session.questionCount);
+  const uncertainty = getUncertaintyFlag(session.messages);
 
   return (
     <div className="flex h-svh flex-col overflow-hidden bg-level-0">
@@ -272,6 +275,8 @@ export default function InterviewPage() {
       <TimePressureArc elapsedSeconds={elapsed} />
 
       <ProbeDepthMeter pct={probe.pct} label={probe.label} />
+
+      <UncertaintyBanner flag={uncertainty} />
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
         <MemoryRail chips={memoryChips} topics={topics} />

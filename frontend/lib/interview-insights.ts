@@ -227,6 +227,56 @@ export function getDraftSignals(
   return out.slice(0, 5);
 }
 
+export type UncertaintyFlag = {
+  id: string;
+  label: string;
+  severity: "soft" | "firm";
+};
+
+/** Frontend heuristic: thin / vague last answer → expect a deeper probe. */
+export function getUncertaintyFlag(
+  messages: InterviewMessage[]
+): UncertaintyFlag | null {
+  const answers = messages.filter((m) => m.role === "candidate");
+  if (answers.length === 0) return null;
+
+  const last = answers[answers.length - 1].content.trim();
+  const words = last.split(/\s+/).filter(Boolean);
+  const lower = last.toLowerCase();
+
+  const vague =
+    /\b(maybe|probably|i think|not sure|something like|kind of|sort of)\b/i.test(
+      last
+    );
+  const thin = words.length > 0 && words.length < 22;
+  const noConcrete =
+    !/\d/.test(last) &&
+    !TOPIC_DEFS.some((t) => t.keys.some((k) => lower.includes(k)));
+
+  if (thin && vague) {
+    return {
+      id: "thin-vague",
+      label: "Low signal — expect a deeper probe on the next turn",
+      severity: "firm",
+    };
+  }
+  if (thin) {
+    return {
+      id: "thin",
+      label: "Thin answer — senior would push for concrete detail next",
+      severity: "soft",
+    };
+  }
+  if (vague && noConcrete) {
+    return {
+      id: "vague",
+      label: "Hedging language — expect a clarifying probe",
+      severity: "soft",
+    };
+  }
+  return null;
+}
+
 export function getGhostProbe(
   messages: InterviewMessage[],
   questionCount: number
