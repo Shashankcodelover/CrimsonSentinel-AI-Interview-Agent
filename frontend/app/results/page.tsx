@@ -13,6 +13,7 @@ import { clearSession, loadSession } from "@/lib/session";
 import type { Feedback, InterviewSessionState } from "@/lib/types";
 import { cn } from "@/lib/utils";
 import { RubricMirror } from "@/components/results/rubric-mirror";
+import { CounterfactualProbes } from "@/components/results/counterfactual-probes";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -93,6 +94,8 @@ export default function ResultsPage() {
           <GapsCard gaps={feedback.gaps} />
           <NextCard next={feedback.next} />
         </div>
+
+        <CounterfactualProbes messages={session.messages} />
 
         <div className="flex flex-wrap gap-4 print:hidden">
           <Link
