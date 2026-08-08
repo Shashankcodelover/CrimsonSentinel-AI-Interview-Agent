@@ -1,10 +1,19 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { buttonVariants } from "@/components/ui/button";
+import { DEMO_CANDIDATE } from "@/lib/demo";
+import {
+  clearSession,
+  getSessionStatus,
+  initSession,
+  type SessionStatus,
+} from "@/lib/session";
 import { cn } from "@/lib/utils";
 
 const fadeUp = {
@@ -21,12 +30,24 @@ const fadeUp = {
 };
 
 export default function LandingPage() {
+  const router = useRouter();
+  const [status, setStatus] = useState<SessionStatus>({ kind: "none" });
+
+  useEffect(() => {
+    setStatus(getSessionStatus());
+  }, []);
+
+  function startDemo() {
+    clearSession();
+    initSession(DEMO_CANDIDATE);
+    router.push("/interview");
+  }
+
   return (
     <div className="flex min-h-screen flex-col bg-level-0">
       <SiteHeader />
 
       <main className="relative flex flex-1 flex-col overflow-hidden">
-        {/* Atmospheric background — tonal layering, not flat */}
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_20%_0%,rgba(153,27,27,0.18),transparent_50%),radial-gradient(ellipse_at_80%_20%,rgba(255,180,172,0.06),transparent_40%),linear-gradient(180deg,#0a0a0a_0%,#121414_55%,#0d0e0f_100%)]"
@@ -40,6 +61,39 @@ export default function LandingPage() {
             backgroundSize: "64px 64px",
           }}
         />
+
+        {status.kind !== "none" && (
+          <div className="relative z-10 border-b border-secondary-container bg-surface-container-low/90 px-margin-mobile py-3 md:px-margin-desktop">
+            <div className="mx-auto flex max-w-container-max flex-wrap items-center justify-between gap-3">
+              <p className="font-code text-code-md text-on-surface-variant">
+                {status.kind === "complete"
+                  ? `Report ready for ${status.session.candidate.name}.`
+                  : `In-progress session for ${status.session.candidate.name}.`}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Link
+                  href={status.kind === "complete" ? "/results" : "/interview"}
+                  className={cn(
+                    buttonVariants({ size: "sm" }),
+                    "rounded bg-primary-container font-code text-code-md text-white hover:bg-primary-container/90"
+                  )}
+                >
+                  {status.kind === "complete" ? "View report" : "Resume interview"}
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    clearSession();
+                    setStatus({ kind: "none" });
+                  }}
+                  className="rounded border border-border-high px-3 py-1.5 font-code text-code-md text-muted-foreground hover:border-on-surface hover:text-on-surface"
+                >
+                  Dismiss
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         <section className="relative mx-auto flex w-full max-w-container-max flex-1 flex-col justify-center px-margin-mobile py-20 md:px-margin-desktop md:py-28">
           <motion.p
@@ -89,12 +143,19 @@ export default function LandingPage() {
             >
               Start Interview
             </Link>
-            <Link
-              href="/#process"
+            <button
+              type="button"
+              onClick={startDemo}
               className={cn(
                 buttonVariants({ variant: "outline", size: "lg" }),
-                "h-11 rounded border-border-high bg-transparent px-6 font-code text-code-md text-muted-foreground hover:border-on-surface hover:bg-transparent hover:text-on-surface"
+                "h-11 rounded border-border-high bg-transparent px-6 font-code text-code-md text-muted-foreground hover:border-brand hover:bg-transparent hover:text-brand"
               )}
+            >
+              Try demo
+            </button>
+            <Link
+              href="/#process"
+              className="font-code text-code-md text-muted-foreground underline-offset-4 hover:text-on-surface hover:underline"
             >
               How it works
             </Link>

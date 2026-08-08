@@ -286,3 +286,44 @@ None.
 
 ### Timestamp
 2026-08-08T12:33:16+05:30
+
+## Prompt 15
+
+### Tool Used
+Cursor Agent (Composer)
+
+### Purpose
+Judge/user-minded feature pass: make the frontend more attractive and usable for demos without touching backend.
+
+### Prompt
+OK all good try to add some more features some good features let us improve the project Okay think like a user or the judge and cheque out that what are the essential features are needed to build these more efficient and more attractive and more Performance are more attractive feat....just think of that and just build out
+Performance are more attractive feat....just think of that and just build out
+
+### Output Summary
+Shipped: Landing Try demo + resume/report banner; Setup Fill demo profile; Interview elapsed timer, end confirm modal, word count, autofocus after thinking, aria-live; Results Copy report + Print; Textarea forwardRef; reduced-motion + basic print CSS; TEAM_NOTES rewritten. Still mock-only — no backend work.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T12:58:27+05:30
+
+## Prompt 16
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+Start next-level feature work: branch feature/next-level, brainstorm into FEATURES.md, build Tier A only. First commit pending polish so baseline is clean.
+
+### Prompt
+We have a working, deployed baseline... create feature/next-level off main... TASK 1 Brainstorm 12-15 ideas... TASK 5 Build Tier A only... TASK 6 Log everything...
+
+### Output Summary
+Committing prior demo/polish features onto frontend, then creating feature/next-level from main and merging frontend (main has no /frontend folder yet — merge brings the working baseline without losing it).
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:07:14+05:30

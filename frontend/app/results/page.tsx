@@ -8,6 +8,7 @@ import { BadgeCheck, TriangleAlert, Route } from "lucide-react";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { buttonVariants } from "@/components/ui/button";
+import { formatReportText } from "@/lib/demo";
 import { clearSession, loadSession } from "@/lib/session";
 import type { Feedback, InterviewSessionState } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -15,6 +16,9 @@ import { cn } from "@/lib/utils";
 export default function ResultsPage() {
   const router = useRouter();
   const [session, setSession] = useState<InterviewSessionState | null>(null);
+  const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
+    "idle"
+  );
 
   useEffect(() => {
     const existing = loadSession();
@@ -24,6 +28,28 @@ export default function ResultsPage() {
     }
     setSession(existing);
   }, [router]);
+
+  async function copyReport() {
+    if (!session?.feedback) return;
+    const text = formatReportText({
+      name: session.candidate.name,
+      jobRole: session.candidate.jobRole,
+      yearsExperience: session.candidate.yearsExperience,
+      education: session.candidate.education,
+      summary: session.feedback.summary,
+      strengths: session.feedback.strengths,
+      gaps: session.feedback.gaps,
+      next: session.feedback.next,
+    });
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopyState("copied");
+      window.setTimeout(() => setCopyState("idle"), 2000);
+    } catch {
+      setCopyState("failed");
+      window.setTimeout(() => setCopyState("idle"), 2500);
+    }
+  }
 
   if (!session?.feedback) {
     return (
@@ -39,7 +65,7 @@ export default function ResultsPage() {
     <div className="flex min-h-screen flex-col bg-background text-on-background">
       <SiteHeader />
 
-      <main className="mx-auto flex w-full max-w-container-max flex-1 flex-col gap-12 px-margin-mobile py-16 md:px-margin-desktop md:py-20">
+      <main className="mx-auto flex w-full max-w-container-max flex-1 flex-col gap-12 px-margin-mobile py-16 md:px-margin-desktop md:py-20 print:gap-8 print:py-8">
         <motion.section
           className="max-w-4xl"
           initial={{ opacity: 0, y: 12 }}
@@ -58,14 +84,14 @@ export default function ResultsPage() {
           </p>
         </motion.section>
 
-        <div className="grid grid-cols-1 gap-gutter md:grid-cols-12">
+        <div className="grid grid-cols-1 gap-gutter md:grid-cols-12 print:gap-4">
           <StrengthsCard strengths={feedback.strengths} />
           <ScoreCard feedback={feedback} />
           <GapsCard gaps={feedback.gaps} />
           <NextCard next={feedback.next} />
         </div>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 print:hidden">
           <Link
             href="/setup"
             onClick={() => clearSession()}
@@ -76,6 +102,30 @@ export default function ResultsPage() {
           >
             New Interview
           </Link>
+          <button
+            type="button"
+            onClick={() => void copyReport()}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-11 rounded border-border-high bg-transparent px-6 font-code text-code-md text-muted-foreground hover:border-on-surface hover:bg-transparent hover:text-on-surface"
+            )}
+          >
+            {copyState === "copied"
+              ? "Copied"
+              : copyState === "failed"
+                ? "Copy failed"
+                : "Copy report"}
+          </button>
+          <button
+            type="button"
+            onClick={() => window.print()}
+            className={cn(
+              buttonVariants({ variant: "outline", size: "lg" }),
+              "h-11 rounded border-border-high bg-transparent px-6 font-code text-code-md text-muted-foreground hover:border-on-surface hover:bg-transparent hover:text-on-surface"
+            )}
+          >
+            Print
+          </button>
           <Link
             href="/"
             className={cn(
@@ -88,7 +138,9 @@ export default function ResultsPage() {
         </div>
       </main>
 
-      <SiteFooter />
+      <div className="print:hidden">
+        <SiteFooter />
+      </div>
     </div>
   );
 }

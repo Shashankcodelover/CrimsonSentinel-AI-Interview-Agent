@@ -54,4 +54,6 @@ export type InterviewSessionState = {
   messages: InterviewMessage[];
   questionCount: number;
   feedback: Feedback | null;
+  /** ISO timestamp when the live interview began (for elapsed timer). */
+  startedAt?: string;
 };

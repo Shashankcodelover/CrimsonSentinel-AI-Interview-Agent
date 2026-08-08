@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiteHeader } from "@/components/layout/site-header";
 import { Textarea } from "@/components/ui/textarea";
+import { formatElapsed } from "@/lib/demo";
 import { postInterview } from "@/lib/interview-api";
 import { loadSession, saveSession, updateSessionFeedback } from "@/lib/session";
 import type { InterviewMessage, InterviewSessionState } from "@/lib/types";
@@ -17,7 +18,10 @@ export default function InterviewPage() {
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [bootstrapping, setBootstrapping] = useState(true);
+  const [confirmEnd, setConfirmEnd] = useState(false);
+  const [elapsed, setElapsed] = useState(0);
   const bottomRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const startedRef = useRef(false);
 
   useEffect(() => {
@@ -34,17 +38,47 @@ export default function InterviewPage() {
     if (!session || startedRef.current) return;
     if (session.messages.length > 0) {
       startedRef.current = true;
+      if (!session.startedAt) {
+        const withStart = { ...session, startedAt: new Date().toISOString() };
+        setSession(withStart);
+        saveSession(withStart);
+      }
       return;
     }
 
     startedRef.current = true;
     void startInterview(session);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- run once when session loads empty
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 
   useEffect(() => {
     bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [session?.messages, thinking]);
+
+  useEffect(() => {
+    if (!thinking) {
+      textareaRef.current?.focus();
+    }
+  }, [thinking]);
+
+  useEffect(() => {
+    if (!session?.startedAt) return;
+    const start = Date.parse(session.startedAt);
+    const tick = () =>
+      setElapsed(Math.floor((Date.now() - start) / 1000));
+    tick();
+    const id = window.setInterval(tick, 1000);
+    return () => window.clearInterval(id);
+  }, [session?.startedAt]);
+
+  useEffect(() => {
+    if (!confirmEnd) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setConfirmEnd(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [confirmEnd]);
 
   async function startInterview(current: InterviewSessionState) {
     setThinking(true);
@@ -61,6 +95,7 @@ export default function InterviewPage() {
         ...current,
         messages,
         questionCount: 1,
+        startedAt: current.startedAt ?? new Date().toISOString(),
       };
       setSession(next);
       saveSession(next);
@@ -88,6 +123,7 @@ export default function InterviewPage() {
     const optimistic: InterviewSessionState = {
       ...session,
       messages: [...session.messages, { role: "candidate", content: message }],
+      startedAt: session.startedAt ?? new Date().toISOString(),
     };
     setSession(optimistic);
     saveSession(optimistic);
@@ -96,8 +132,8 @@ export default function InterviewPage() {
     setError(null);
 
     try {
-      const turn =
-        optimistic.messages.filter((m) => m.role === "candidate").length;
+      const turn = optimistic.messages.filter((m) => m.role === "candidate")
+        .length;
       const res = await postInterview({
         sessionId: session.sessionId,
         message,
@@ -131,6 +167,7 @@ export default function InterviewPage() {
 
   async function endInterview() {
     if (!session || thinking) return;
+    setConfirmEnd(false);
     setThinking(true);
     setError(null);
     try {
@@ -158,6 +195,10 @@ export default function InterviewPage() {
     }
   }
 
+  const wordCount = draft.trim()
+    ? draft.trim().split(/\s+/).filter(Boolean).length
+    : 0;
+
   if (bootstrapping || !session) {
     return (
       <div className="flex min-h-screen items-center justify-center bg-level-0 font-code text-code-md text-on-surface-variant">
@@ -170,7 +211,7 @@ export default function InterviewPage() {
     <div className="flex h-svh flex-col overflow-hidden bg-level-0">
       <SiteHeader />
 
-      <div className="flex items-center justify-between border-b border-border-low px-4 py-2">
+      <div className="flex items-center justify-between gap-3 border-b border-border-low px-4 py-2">
         <div className="min-w-0">
           <p className="truncate font-code text-code-md text-on-surface">
             {session.candidate.name} · {session.candidate.jobRole}
@@ -179,7 +220,15 @@ export default function InterviewPage() {
             Session {session.sessionId.slice(0, 8)}
           </p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex shrink-0 items-center gap-4">
+          <div className="hidden text-right sm:block">
+            <p className="font-label text-label-caps uppercase text-muted-foreground">
+              Elapsed
+            </p>
+            <p className="font-code text-code-md tabular-nums text-on-surface">
+              {formatElapsed(elapsed)}
+            </p>
+          </div>
           <div className="text-right">
             <p className="font-label text-label-caps uppercase text-muted-foreground">
               Questions
@@ -191,7 +240,7 @@ export default function InterviewPage() {
           <button
             type="button"
             disabled={thinking}
-            onClick={() => void endInterview()}
+            onClick={() => setConfirmEnd(true)}
             className="rounded-sm border border-border-high bg-transparent px-3 py-1.5 font-code text-code-md text-muted-foreground transition-colors hover:border-on-surface hover:text-on-surface disabled:opacity-50"
           >
             End Interview
@@ -240,19 +289,21 @@ export default function InterviewPage() {
               ))}
             </AnimatePresence>
 
-            {thinking && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                className="flex items-center gap-3 font-code text-code-md text-on-surface-variant"
-              >
-                <span className="relative flex size-2">
-                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary-container opacity-60" />
-                  <span className="relative inline-flex size-2 rounded-full bg-primary-container" />
-                </span>
-                Thinking…
-              </motion.div>
-            )}
+            <div aria-live="polite" aria-atomic="true">
+              {thinking && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  className="flex items-center gap-3 font-code text-code-md text-on-surface-variant"
+                >
+                  <span className="relative flex size-2">
+                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-primary-container opacity-60" />
+                    <span className="relative inline-flex size-2 rounded-full bg-primary-container" />
+                  </span>
+                  Thinking…
+                </motion.div>
+              )}
+            </div>
             <div ref={bottomRef} />
           </div>
         </section>
@@ -263,11 +314,12 @@ export default function InterviewPage() {
               Answer
             </span>
             <span className="font-code text-code-md text-muted-foreground">
-              monospace · autosize
+              {wordCount} words · monospace
             </span>
           </div>
           <div className="flex flex-1 flex-col p-3">
             <Textarea
+              ref={textareaRef}
               value={draft}
               onChange={(e) => setDraft(e.target.value)}
               disabled={thinking}
@@ -301,6 +353,56 @@ export default function InterviewPage() {
           </div>
         </section>
       </div>
+
+      <AnimatePresence>
+        {confirmEnd && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="end-interview-title"
+            onClick={() => setConfirmEnd(false)}
+          >
+            <motion.div
+              className="w-full max-w-md border border-secondary-container bg-surface-container p-6 shadow-crimson"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 8 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <h2
+                id="end-interview-title"
+                className="font-headline text-headline-sm text-on-surface"
+              >
+                End interview?
+              </h2>
+              <p className="mt-3 font-body text-body-md text-on-surface-variant">
+                This generates your evaluation report from the answers so far.
+                You can&apos;t continue this session afterward.
+              </p>
+              <div className="mt-6 flex flex-wrap justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setConfirmEnd(false)}
+                  className="rounded border border-border-high px-4 py-2 font-code text-code-md text-muted-foreground hover:border-on-surface hover:text-on-surface"
+                >
+                  Keep going
+                </button>
+                <button
+                  type="button"
+                  onClick={() => void endInterview()}
+                  className="rounded bg-primary-container px-4 py-2 font-code text-code-md text-white hover:opacity-90"
+                >
+                  End &amp; view report
+                </button>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

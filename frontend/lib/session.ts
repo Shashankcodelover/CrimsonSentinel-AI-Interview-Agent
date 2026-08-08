@@ -44,3 +44,18 @@ export function updateSessionFeedback(feedback: Feedback): void {
   if (!current) return;
   saveSession({ ...current, feedback });
 }
+
+export type SessionStatus =
+  | { kind: "none" }
+  | { kind: "in_progress"; session: InterviewSessionState }
+  | { kind: "complete"; session: InterviewSessionState };
+
+export function getSessionStatus(): SessionStatus {
+  const session = loadSession();
+  if (!session) return { kind: "none" };
+  if (session.feedback) return { kind: "complete", session };
+  if (session.messages.length > 0 || session.questionCount > 0) {
+    return { kind: "in_progress", session };
+  }
+  return { kind: "in_progress", session };
+}

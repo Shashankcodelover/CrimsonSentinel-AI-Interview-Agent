@@ -6,23 +6,22 @@ Last updated: 2026-08-08. For teammates, not judges. Rewrite in place — don’
 
 - Next.js app in `/frontend` only: Landing `/`, Setup `/setup`, Interview `/interview`, Results `/results`.
 - Full click-through works against a **local mock**: Setup → Interview (send answers, thinking state, question count, End) → Results shows `summary`, `strengths[]`, `gaps[]`, `next[]`.
-- Mock lives at `/frontend/app/api/interview/route.ts`. It is temporary. Not Member 2’s backend.
-- Candidate fields on setup: `id`, `name`, `jobRole`, `yearsExperience`, `education`.
-- Session kept in browser `sessionStorage`. Refresh mid-interview restores the transcript; no white screen in testing we did.
-- Stitch-based dark UI, `next/font`, footer year 2026. Production `npm run build` succeeds.
-- Phone-width (~390px) was spot-checked on landing / interview / results; usable, not a polished mobile design pass.
+- **Try demo** on landing (skips form with a demo candidate). **Fill demo profile** on setup. **Resume / View report** banner if a session exists in this browser tab.
+- Interview extras: elapsed timer, end confirmation modal, word count, autofocus after replies, `aria-live` thinking state.
+- Results: **Copy report** + **Print** (actions hidden when printing).
+- Mock at `/frontend/app/api/interview/route.ts` — temporary, not Member 2’s backend.
+- Session in `sessionStorage`. Refresh mid-interview restores transcript.
+- Stitch-based dark UI, footer year 2026. `npm run build` succeeds. Phone-width spot-checked.
 
 ## What's not done / known gaps
 
 - No real backend wired yet — mock only.
-- Footer nav (Documentation, etc.) are dead `#` links.
-- Results “aggregate score” bars are UI-only (derived client-side), not from the API.
-- `docs/technical-spec/` exists but is empty in this repo right now; we built against the shared POST shape below.
-- Don’t run `npm run build` while `npm run dev` is up on the same folder — it can break the running API until you restart dev.
+- Footer nav links are dead `#` placeholders.
+- Results aggregate score bars are UI-only (derived client-side), not from the API.
+- `docs/technical-spec/` folder is empty in-repo; contract below is what we build against.
+- Don’t run `npm run build` while `npm run dev` shares the same `.next` folder.
 
 ## How to run this locally
-
-From a clean clone:
 
 ```bash
 cd frontend
@@ -32,46 +31,33 @@ npm run dev
 
 Open **http://localhost:3000**
 
-No env vars required for the mock. Optional later: copy `.env.example` → `.env.local` and set `NEXT_PUBLIC_INTERVIEW_API_URL` when a real backend URL exists.
+No env required for the mock. Optional: copy `.env.example` → `.env.local` and set `NEXT_PUBLIC_INTERVIEW_API_URL` when a real backend URL exists.
 
 ## The one shared contract with the backend
 
-This is the only frontend ↔ backend surface. Frontend currently hits the **local mock**. When a real backend URL exists, set `NEXT_PUBLIC_INTERVIEW_API_URL` and restart — that’s the swap. Don’t invent other shared APIs from the frontend side.
+Only shared surface. Frontend uses the local mock until you set `NEXT_PUBLIC_INTERVIEW_API_URL`.
 
 `POST /api/interview`
 
-**Start**
+**Start** `{ "sessionId", "candidate": { "id", "name", "jobRole", "yearsExperience", "education" } }`  
+→ `{ "reply", "done": false }`
 
-```json
-{ "sessionId": "...", "candidate": { "id": "...", "name": "...", "jobRole": "...", "yearsExperience": 0, "education": "..." } }
-```
+**Turn** `{ "sessionId", "message" }`  
+→ `{ "reply", "done": false }`
 
-→ `{ "reply": "...", "done": false }`
+**End** → `{ "reply", "done": true, "feedback": { "summary", "strengths": [], "gaps": [], "next": [] } }`
 
-**Turn**
-
-```json
-{ "sessionId": "...", "message": "..." }
-```
-
-→ `{ "reply": "...", "done": false }`
-
-**End** (same endpoint; signal completion)
-
-→ `{ "reply": "...", "done": true, "feedback": { "summary": "...", "strengths": [], "gaps": [], "next": [] } }`
-
-Note: the local mock also accepts extra fields (`turn`, `candidate` on turns/end) so it can stay serverless-friendly. The **shared** shape above is what we align on. When your backend is up, send Preetham the deployed URL — no other coordination needed on our side.
+Local mock may also accept extra fields (`turn`, `candidate`) for serverless convenience. Shared shape above is what we align on. Send Preetham the deployed URL when ready — no other coordination needed.
 
 ## What the next person should do
 
-1. Run the app locally and click Landing → Setup → Interview (a few answers) → End → Results.
-2. If you’re Member 2: implement against the contract above; when deployed, give frontend the URL for `NEXT_PUBLIC_INTERVIEW_API_URL`.
-3. If you’re frontend: don’t rewrite the mock into a “real” backend — swap URL only.
-4. Push/deploy is waiting on Preetham’s call (not done until asked).
+1. Click **Try demo** and walk Landing → Interview → End → Results.
+2. Member 2: match the contract; give frontend the URL for `NEXT_PUBLIC_INTERVIEW_API_URL`.
+3. Frontend: don’t turn the mock into a real backend — swap the env URL only.
 
 ## Notes / decisions worth knowing
 
-- `sessionStorage`, not a database — auth/DB out of frontend scope.
-- Answer box is monospace + autosize; **no** fake synced line numbers (they desync on wrap).
-- Brand text uses coral `#ffb4ac` for contrast on dark; solid crimson `#991b1b` is for buttons.
-- Setup/interview actions use native inputs/buttons after Base UI hydration/submit flakiness with shadcn defaults.
+- `sessionStorage`, not a DB — auth/DB out of frontend scope.
+- Monospace autosize answer box; **no** fake line numbers.
+- Brand text `#ffb4ac`; button fill `#991b1b` + white.
+- Native inputs/buttons on setup/interview after Base UI hydration flakiness.

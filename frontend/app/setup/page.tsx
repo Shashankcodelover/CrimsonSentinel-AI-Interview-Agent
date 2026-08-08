@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { initSession } from "@/lib/session";
+import { DEMO_CANDIDATE } from "@/lib/demo";
 import type { Candidate } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
@@ -165,6 +166,13 @@ export default function SetupPage() {
                 className="inline-flex h-11 items-center justify-center rounded bg-primary-container px-8 font-code text-code-md text-white shadow-crimson transition-opacity hover:opacity-90"
               >
                 Begin Interview
+              </button>
+              <button
+                type="button"
+                onClick={() => setForm(DEMO_CANDIDATE)}
+                className="inline-flex h-11 items-center justify-center rounded border border-border-high px-4 font-code text-code-md text-muted-foreground transition-colors hover:border-on-surface hover:text-on-surface"
+              >
+                Fill demo profile
               </button>
               <p className="font-code text-code-md text-muted-foreground">
                 Session stays local until the interview starts.
