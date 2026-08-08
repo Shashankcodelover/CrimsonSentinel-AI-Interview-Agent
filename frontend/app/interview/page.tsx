@@ -27,6 +27,12 @@ import { TimePressureArc } from "@/components/interview/time-pressure-arc";
 import { UncertaintyBanner } from "@/components/interview/uncertainty-banner";
 import { ProbeCadence } from "@/components/interview/probe-cadence";
 import { AnswerStructureCoach } from "@/components/interview/answer-structure-coach";
+import { CoverageRadar } from "@/components/interview/coverage-radar";
+import { StickyNotes } from "@/components/interview/sticky-notes";
+import { ConfidenceDial } from "@/components/interview/confidence-dial";
+import { PaceMeter } from "@/components/interview/pace-meter";
+import { PrefsBar } from "@/components/shared/prefs-bar";
+import { loadBookmarks, loadPrefs, toggleBookmark } from "@/lib/ui-prefs";
 
 export default function InterviewPage() {
   const router = useRouter();
@@ -37,6 +43,11 @@ export default function InterviewPage() {
   const [bootstrapping, setBootstrapping] = useState(true);
   const [confirmEnd, setConfirmEnd] = useState(false);
   const [elapsed, setElapsed] = useState(0);
+  const [confidence, setConfidence] = useState(3);
+  const [lastSendAt, setLastSendAt] = useState<number | null>(null);
+  const [nowTick, setNowTick] = useState(() => Date.now());
+  const [bookmarks, setBookmarks] = useState<number[]>([]);
+  const [focusMode, setFocusMode] = useState(false);
   const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const startedRef = useRef(false);
@@ -48,8 +59,18 @@ export default function InterviewPage() {
       return;
     }
     setSession(existing);
+    setBookmarks(loadBookmarks(existing.sessionId));
+    setFocusMode(loadPrefs().focusMode);
     setBootstrapping(false);
   }, [router]);
+
+  useEffect(() => {
+    const id = window.setInterval(() => {
+      setNowTick(Date.now());
+      setFocusMode(loadPrefs().focusMode);
+    }, 1000);
+    return () => window.clearInterval(id);
+  }, []);
 
   useEffect(() => {
     if (!session || startedRef.current) return;
@@ -170,6 +191,8 @@ export default function InterviewPage() {
       };
       setSession(withReply);
       saveSession(withReply);
+      setLastSendAt(Date.now());
+      setConfidence(3);
 
       if (res.done && res.feedback) {
         updateSessionFeedback(res.feedback);
@@ -232,7 +255,12 @@ export default function InterviewPage() {
   const uncertainty = getUncertaintyFlag(session.messages);
 
   return (
-    <div className="flex h-svh flex-col overflow-hidden bg-level-0">
+    <div
+      className={cn(
+        "flex h-svh flex-col overflow-hidden bg-level-0",
+        focusMode && "interview-focus-mode"
+      )}
+    >
       <SiteHeader />
 
       <div className="flex items-center justify-between gap-3 border-b border-border-low px-4 py-2">
@@ -244,7 +272,8 @@ export default function InterviewPage() {
             Session {session.sessionId.slice(0, 8)}
           </p>
         </div>
-        <div className="flex shrink-0 items-center gap-4">
+        <div className="flex shrink-0 items-center gap-3 md:gap-4">
+          <PrefsBar />
           <div className="hidden text-right sm:block">
             <p className="font-label text-label-caps uppercase text-muted-foreground">
               Elapsed
@@ -283,7 +312,10 @@ export default function InterviewPage() {
       <UncertaintyBanner flag={uncertainty} />
 
       <div className="flex min-h-0 flex-1 flex-col md:flex-row">
-        <MemoryRail chips={memoryChips} topics={topics} />
+        <div className="flex w-full shrink-0 flex-col md:w-56">
+          <MemoryRail chips={memoryChips} topics={topics} />
+          <CoverageRadar messages={session.messages} compact />
+        </div>
 
         <section className="min-h-0 flex-1 overflow-y-auto border-b border-border-low md:border-b-0 md:border-r">
           <div className="space-y-6 p-4 md:p-6">
@@ -299,9 +331,32 @@ export default function InterviewPage() {
                     msg.role === "candidate" && "ml-auto"
                   )}
                 >
-                  <p className="mb-2 font-label text-label-caps uppercase text-muted-foreground">
-                    {msg.role === "interviewer" ? "Interviewer" : "You"}
-                  </p>
+                  <div className="mb-2 flex items-center justify-between gap-2">
+                    <p className="font-label text-label-caps uppercase text-muted-foreground">
+                      {msg.role === "interviewer" ? "Interviewer" : "You"}
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setBookmarks(
+                          toggleBookmark(session.sessionId, i)
+                        )
+                      }
+                      className={cn(
+                        "font-code text-[10px]",
+                        bookmarks.includes(i)
+                          ? "text-brand"
+                          : "text-muted-foreground hover:text-on-surface"
+                      )}
+                      aria-label={
+                        bookmarks.includes(i)
+                          ? "Remove bookmark"
+                          : "Bookmark moment"
+                      }
+                    >
+                      {bookmarks.includes(i) ? "★ Bookmarked" : "☆ Bookmark"}
+                    </button>
+                  </div>
                   <div
                     className={cn(
                       "whitespace-pre-wrap border px-4 py-3 font-body text-body-md text-on-surface",
@@ -364,6 +419,14 @@ export default function InterviewPage() {
               className="min-h-[120px] flex-1 resize-none rounded-sm border-0 bg-[#0f0f0f] p-4 font-code text-code-md leading-[22px] text-on-surface shadow-none placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-primary-container/50 md:min-h-[180px] md:text-code-md"
             />
             <AnswerStructureCoach draft={draft} />
+            <ConfidenceDial
+              value={confidence}
+              onChange={setConfidence}
+              disabled={thinking}
+            />
+            <div className="mt-2">
+              <PaceMeter lastSendAt={lastSendAt} nowTick={nowTick} />
+            </div>
             {error && (
               <p role="alert" className="mt-2 font-code text-code-md text-error">
                 {error}
@@ -383,6 +446,7 @@ export default function InterviewPage() {
               </button>
             </div>
           </div>
+          <StickyNotes sessionId={session.sessionId} />
           <LiveEvalDraft signals={draftSignals} ghostProbe={ghostProbe} />
         </section>
       </div>

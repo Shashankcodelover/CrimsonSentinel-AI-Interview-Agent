@@ -16,6 +16,14 @@ import { RubricMirror } from "@/components/results/rubric-mirror";
 import { CounterfactualProbes } from "@/components/results/counterfactual-probes";
 import { SessionDiff } from "@/components/results/session-diff";
 import { EvidenceQuotes } from "@/components/results/evidence-quotes";
+import { RubricScorecard } from "@/components/results/rubric-scorecard";
+import { TurnScrubber } from "@/components/results/turn-scrubber";
+import { TranscriptExport } from "@/components/results/transcript-export";
+import { GapClosureTracker } from "@/components/results/gap-closure-tracker";
+import { BookmarkedMoments } from "@/components/results/bookmarked-moments";
+import { CoverageRadar } from "@/components/interview/coverage-radar";
+import { PrefsBar } from "@/components/shared/prefs-bar";
+import { loadBookmarks } from "@/lib/ui-prefs";
 
 export default function ResultsPage() {
   const router = useRouter();
@@ -23,6 +31,7 @@ export default function ResultsPage() {
   const [copyState, setCopyState] = useState<"idle" | "copied" | "failed">(
     "idle"
   );
+  const [bookmarks, setBookmarks] = useState<number[]>([]);
 
   useEffect(() => {
     const existing = loadSession();
@@ -31,6 +40,7 @@ export default function ResultsPage() {
       return;
     }
     setSession(existing);
+    setBookmarks(loadBookmarks(existing.sessionId));
   }, [router]);
 
   async function copyReport() {
@@ -70,6 +80,9 @@ export default function ResultsPage() {
       <SiteHeader />
 
       <main className="mx-auto flex w-full max-w-container-max flex-1 flex-col gap-12 px-margin-mobile py-16 md:px-margin-desktop md:py-20 print:gap-8 print:py-8">
+        <div className="flex flex-wrap items-center justify-between gap-3 print:hidden">
+          <PrefsBar />
+        </div>
         <motion.section
           className="max-w-4xl"
           initial={{ opacity: 0, y: 12 }}
@@ -90,9 +103,25 @@ export default function ResultsPage() {
 
         <RubricMirror messages={session.messages} />
 
+        <CoverageRadar messages={session.messages} />
+
+        <RubricScorecard messages={session.messages} />
+
         <SessionDiff messages={session.messages} />
 
         <EvidenceQuotes messages={session.messages} />
+
+        <TurnScrubber messages={session.messages} bookmarks={bookmarks} />
+
+        <BookmarkedMoments
+          sessionId={session.sessionId}
+          messages={session.messages}
+        />
+
+        <GapClosureTracker
+          messages={session.messages}
+          finalGaps={feedback.gaps}
+        />
 
         <div className="grid grid-cols-1 gap-gutter md:grid-cols-12 print:gap-4">
           <StrengthsCard strengths={feedback.strengths} />
@@ -102,6 +131,8 @@ export default function ResultsPage() {
         </div>
 
         <CounterfactualProbes messages={session.messages} />
+
+        <TranscriptExport session={session} />
 
         <div className="flex flex-wrap gap-4 print:hidden">
           <Link

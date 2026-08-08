@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Serif, Inter, JetBrains_Mono } from "next/font/google";
+import { AppChrome } from "@/components/shared/app-chrome";
 import "./globals.css";
 
 const ibmPlexSerif = IBM_Plex_Serif({
@@ -39,7 +40,7 @@ export default function RootLayout({
       <body
         className={`${ibmPlexSerif.variable} ${inter.variable} ${jetbrainsMono.variable} min-h-screen bg-background text-on-background antialiased`}
       >
-        {children}
+        <AppChrome>{children}</AppChrome>
       </body>
     </html>
   );

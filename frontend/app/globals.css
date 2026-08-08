@@ -189,6 +189,28 @@
   }
 }
 
+html[data-reduce-motion="true"] *,
+html[data-reduce-motion="true"] *::before,
+html[data-reduce-motion="true"] *::after {
+  animation-duration: 0.01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.01ms !important;
+  scroll-behavior: auto !important;
+}
+
+.interview-focus-mode [aria-label="Interviewer memory preview"],
+.interview-focus-mode [aria-label="Topic coverage radar"],
+.interview-focus-mode [aria-label="Live evaluation draft"],
+.interview-focus-mode [aria-label="Probe cadence"] {
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
+.interview-focus-mode [aria-label="Interviewer memory preview"]:hover,
+.interview-focus-mode [aria-label="Topic coverage radar"]:hover {
+  opacity: 1;
+}
+
 @media print {
   body {
     background: white !important;

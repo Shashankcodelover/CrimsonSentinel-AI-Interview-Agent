@@ -9,6 +9,8 @@ import { initSession } from "@/lib/session";
 import { DEMO_CANDIDATE } from "@/lib/demo";
 import type { Candidate } from "@/lib/types";
 import { cn } from "@/lib/utils";
+import { WarmupChecklist } from "@/components/setup/warmup-checklist";
+import { PrefsBar } from "@/components/shared/prefs-bar";
 
 const empty: Candidate = {
   id: "",
@@ -86,14 +88,21 @@ export default function SetupPage() {
               Context shapes the interview. Enter your details so the agent can
               calibrate difficulty and domain focus.
             </p>
+            <div className="mt-6">
+              <PrefsBar />
+            </div>
           </motion.div>
+
+          <div className="relative mt-10 max-w-2xl">
+            <WarmupChecklist />
+          </div>
 
           <motion.form
             onSubmit={onSubmit}
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.08 }}
-            className="mt-12 max-w-2xl space-y-6 border border-secondary-container bg-surface-container-low p-6 md:p-8"
+            className="mt-4 max-w-2xl space-y-6 border border-secondary-container bg-surface-container-low p-6 md:p-8"
           >
             <Field
               id="candidate-id"
