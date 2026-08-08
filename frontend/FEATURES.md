@@ -105,23 +105,29 @@ Frontend-only · S · low risk · high visual payoff. Building these **in order*
 
 Status: **shipped on `feature/next-level`** — Probe Depth, Memory Rail (+ topics), Live Evaluation Draft, Ghost Next Probe.
 
+**Follow-on commits (same branch, still frontend-only):**
+- Role Calibration Strip  
+- Answer Signal Highlighter  
+- Rubric Mirror (console → report)  
+- Counterfactual Probes on results  
+
 ---
 
 ## TIER B — DOCUMENT AS ROADMAP
 
-Great for judge talk / Stage 4 storytelling — not building tonight.
+Still useful for judge talk; several items promoted into follow-on commits above.
 
-| Idea | Why park it |
-|------|-------------|
-| Answer Signal Highlighter | Nice polish; less “wow” than memory rail |
-| Role Calibration Strip | Easy but overlaps Memory Rail header |
-| Soft Time Pressure Arc | Easy; lower uniqueness |
-| Session Diff View | Needs a new screen beat — more UX churn |
-| Rubric Mirror on Results | Strong continuity; M effort after Tier A |
-| Counterfactual Probe Cards | Strong narrative; better after results polish |
-| Honest Uncertainty Flags | Needs careful UX so it doesn’t feel insulting |
+| Idea | Status |
+|------|--------|
+| Answer Signal Highlighter | **Shipped** on feature/next-level |
+| Role Calibration Strip | **Shipped** on feature/next-level |
+| Soft Time Pressure Arc | Parked — lower uniqueness |
+| Session Diff View | Parked — more UX churn |
+| Rubric Mirror on Results | **Shipped** on feature/next-level |
+| Counterfactual Probe Cards | **Shipped** on feature/next-level |
+| Honest Uncertainty Flags | Parked — needs careful UX copy |
 
-Pitch line for judges: *“Tonight you see memory and depth visualized live; roadmap is closing the loop from those chips into the report and counterfactual probes.”*
+Pitch line for judges: *“You see memory and depth live in the console; the report mirrors those signals and still lists probes a senior might ask next.”*
 
 ---
 
@@ -146,6 +152,6 @@ Talking points for Member 2:
 | State | Items |
 |-------|--------|
 | **Shipped baseline** | Landing, Setup, Interview, Results, mock API, demo/timer/copy/print |
-| **Building now (Tier A)** | Probe Depth, Memory Rail, Live Draft, Ghost Next Probe |
-| **Roadmap (Tier B)** | Highlighter, time arc, diff view, rubric mirror, counterfactuals, uncertainty |
+| **Shipped Tier A + follow-ons** | Probe Depth, Memory Rail, Live Draft, Ghost Probe, Role Calibration, Signal Highlight, Rubric Mirror, Counterfactuals |
+| **Roadmap (Tier B remaining)** | Time arc, session diff, uncertainty flags |
 | **Backend-gated (Tier C)** | Real Breeth confidence + follow-up graph |

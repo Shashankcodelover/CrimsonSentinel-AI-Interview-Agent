@@ -427,3 +427,28 @@ None.
 
 ### Timestamp
 2026-08-08T13:22:42+05:30
+
+## Prompt 22
+
+### Tool Used
+Cursor Agent (Composer) + git
+
+### Purpose
+Frequent feature commits on feature/next-level only: calibration strip, signal highlight, rubric mirror, counterfactuals; update docs; never touch main.
+
+### Prompt
+(Continuation of Prompt 21 — commit often on new branch, continue Tier plan)
+
+### Output Summary
+Separate commits pushed to origin/feature/next-level only:
+- f1bad55 Role calibration strip
+- 985e34a Signal term highlighting
+- 48917fd Rubric mirror on results
+- ee66913 Counterfactual probes
+Docs (FEATURES + TEAM_NOTES) updated in this follow-up commit. main not checked out, not merged, not pushed.
+
+### Manual Changes
+None.
+
+### Timestamp
+2026-08-08T13:25:03+05:30
