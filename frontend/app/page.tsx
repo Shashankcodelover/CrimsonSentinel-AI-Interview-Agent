@@ -15,6 +15,8 @@ import {
   type SessionStatus,
 } from "@/lib/session";
 import { cn } from "@/lib/utils";
+import { CognitiveTopologyMesh } from "@/components/CognitiveTopologyMesh";
+import { BulkIngestionStudio } from "@/components/BulkIngestionStudio";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -32,6 +34,8 @@ const fadeUp = {
 export default function LandingPage() {
   const router = useRouter();
   const [status, setStatus] = useState<SessionStatus>({ kind: "none" });
+  const [showMesh, setShowMesh] = useState(false);
+  const [showIngestion, setShowIngestion] = useState(false);
 
   useEffect(() => {
     setStatus(getSessionStatus());
@@ -153,6 +157,26 @@ export default function LandingPage() {
             >
               Try demo
             </button>
+            <button
+              type="button"
+              onClick={() => setShowMesh(true)}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "h-11 rounded border-red-800/60 bg-red-950/30 px-6 font-code text-code-md text-red-300 hover:border-red-600 hover:bg-red-950/60 hover:text-red-200"
+              )}
+            >
+              Cognitive Mesh
+            </button>
+            <button
+              type="button"
+              onClick={() => setShowIngestion(true)}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "h-11 rounded border-red-800/60 bg-red-950/30 px-6 font-code text-code-md text-red-300 hover:border-red-600 hover:bg-red-950/60 hover:text-red-200"
+              )}
+            >
+              Batch Ingestion
+            </button>
             <Link
               href="/#process"
               className="font-code text-code-md text-muted-foreground underline-offset-4 hover:text-on-surface hover:underline"
@@ -240,6 +264,17 @@ export default function LandingPage() {
         </section>
 
       </main>
+
+      {showMesh && (
+        <CognitiveTopologyMesh
+          onClose={() => setShowMesh(false)}
+          onOpenIngestion={() => { setShowMesh(false); setShowIngestion(true); }}
+        />
+      )}
+
+      {showIngestion && (
+        <BulkIngestionStudio onClose={() => setShowIngestion(false)} />
+      )}
 
       <SiteFooter />
     </div>

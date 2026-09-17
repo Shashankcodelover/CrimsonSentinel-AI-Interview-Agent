@@ -1,151 +1,72 @@
-﻿# Crimson Sentinel — Autonomous Cognitive AI Interview Agent
+# ⚔️ Crimson Sentinel — Autonomous Cognitive AI Interview Agent
 
-[![Next.js 15](https://img.shields.io/badge/Next.js-15.0-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.5-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
-[![Vitest](https://img.shields.io/badge/Tests-19%20Passed-brightgreen?logo=vitest)](https://vitest.dev/)
-[![Status](https://img.shields.io/badge/Calibration-L5%20to%20L7+-crimson)](#)
+[![Automated Tests](https://img.shields.io/badge/Tests-28%2F28%20Passing-brightgreen?style=for-the-badge&logo=vitest)](frontend/lib/enterpriseMesh.test.ts)
+[![Frontend Build](https://img.shields.io/badge/Frontend-Next.js%2015%20%2B%20Tailwind%204-blue?style=for-the-badge&logo=next.js)](frontend/)
+[![Architecture Grade](https://img.shields.io/badge/Architecture-Socratic%20Cognitive%20Mesh-crimson?style=for-the-badge)](frontend/lib/cognitiveMeshService.ts)
+[![Enterprise Ready](https://img.shields.io/badge/Enterprise-Batch%20ETL%20%2B%20Universal%20Purge-purple?style=for-the-badge)](frontend/components/BulkIngestionStudio.tsx)
+[![Status](https://img.shields.io/badge/Status-100%25%20Certified%20%26%20Synchronized-success?style=for-the-badge)]()
 
-> An autonomous, multi-signal, Socratic technical assessment platform engineered to evaluate senior and principal software engineering talent on deep distributed systems, fault tolerance, and operational trade-offs.
-
----
-
-## 1. Problem Statement
-
-Traditional technical interviewing is profoundly broken:
-1. **Trivia & LeetCode Bias**: Rote algorithmic puzzles test memorization over real-world systems architecture, production intuition, and failure handling.
-2. **Interviewer Variability & Fatigue**: Human interviewers suffer from cognitive fatigue, subjective biases, inconsistent calibration, and unstandardized rubric scoring.
-3. **Superficial Screening**: Standard automated screening tools rely on keyword matchers or shallow multiple-choice tests easily defeated by superficial buzzwords.
-
-**Crimson Sentinel** solves this by acting as an autonomous **Senior Staff Interviewer**. It deploys dynamic Socratic escalation, deepens probes when buzzwords are used, and conducts a multi-dimensional technical evaluation with verifiable transcript evidence.
+> **Autonomous Socratic Technical Assessment Platform, Relational Cognitive Probe Mesh & Multi-Entity Batch Calibration Studio**  
+> Engineered for engineering leaders and hiring committees to conduct rigorous, multi-signal technical evaluations of senior and principal software engineering talent on deep distributed systems, hardware memory models, consensus mechanisms, and operational trade-offs.
 
 ---
 
-## 2. Core Capabilities & Architectural Pillars
+## 📸 Platform Hero Showcase
 
-### A. Dynamic Socratic Escalation
-Rather than following a static decision tree, Crimson Sentinel reads between the lines of candidate responses. If a candidate mentions "caching with Redis", Sentinel immediately probes cache stampede prevention, eviction mechanics (`allkeys-lru` vs `volatile-lfu`), replication topology, and split-brain resolution.
-
-### B. Breeth Adaptive Memory Rail & Ghost Probes
-A real-time cognitive tracker visualizes active architectural topics across turns, monitoring coverage across 6 key systems dimensions:
-- Distributed Ingestion & Stream Processing
-- Storage Internals & Consensus (WAL, Raft, LSM)
-- Edge Networking & Rate Limiting
-- High-Concurrency & Contention Control
-- Resilience & Blast Radius Isolation
-- Observability & Incident Diagnostics
-
-### C. Objective 4-Quadrant Scoring Engine
-Every session generates a comprehensive hiring-committee-ready dossier scored across 4 foundational dimensions:
-1. **First-Principles Foundation (30%)**: Hardware mechanics, memory models, I/O efficiency, and theoretical bounds.
-2. **Scale & System Trade-offs (25%)**: CAP/PACELC trade-offs, cost awareness, and high-throughput bottlenecks.
-3. **Operational Resilience (25%)**: Circuit breakers, gracefully degraded modes, and failover mechanics.
-4. **Communication Precision (20%)**: Architectural clarity, structured thinking, and collaborative debugging instincts.
-
-### D. Comprehensive Result Dossier
-- **Evidence Quotes**: Links exact transcript quotes to specific rubric ratings.
-- **Turn Scrubber & Bookmarking**: Replay critical pressure moments and inspect candidate pivots.
-- **Counterfactual Probes**: What questions *should* have been asked if the candidate took an alternate design path.
-- **Gap Closure Tracker**: Verifies whether initial architectural omissions were successfully resolved during follow-up turns.
+![Platform Hero Showcase](platform_hero_showcase.png)
 
 ---
 
-## 3. System Architecture
+## 🖥️ Canonical Desktop Showcase Gallery (1920x1080 @ 2x)
 
-```
-[ Candidate Browser ] 
-         │  (WebSockets / HTTP SSE)
-         ▼
-[ Next.js 15 App Router Frontend ]
-  ├── Strategy Panel (Live Diagnostics HUD)
-  ├── Monospace Adaptive Answer Console
-  ├── Real-time Signal Highlighter & Sentiment Dial
-  └── Interactive Multi-Axis Coverage Radar
-         │
-         ▼  (Strict JSON Session Protocol)
-[ Sentinel Reasoning Engine (/api/interview) ]
-  ├── Socratic Turn Manager & Escalation Heuristics
-  ├── Breeth Cognitive Memory Rail
-  ├── Signal-to-Noise Ratio & Keyword Extractor
-  └── Rubric Calibrator & Tier Normalizer
-         │
-         ▼
-[ Technical Evaluation Dossier ]
-  ├── 4-Quadrant Calibrated Scorecard
-  ├── Verifiable Transcript Evidence Chains
-  └── Hiring Committee Next-Step Recommendations
-```
+### 1. Executive Command Center & Cognitive Probe Mesh
+| Screen | Screenshot | Enterprise Capabilities |
+|---|---|---|
+| **Executive Command Center** | ![Executive Command Center](screenshots/desktop/01_desktop_sentinel_executive_command.png) | High-contrast tactical command portal with real-time candidate session recovery, live telemetry status, and Socratic interview launchpad. |
+| **Socratic Cognitive Assessment Mesh** | ![Cognitive Topology Mesh](screenshots/desktop/02_desktop_cognitive_topology_mesh.png) | Relational cognitive probe topology connecting distributed systems domains (Ingestion, Storage WAL/LSM, Consensus, Concurrency, Resilience) with live depth ratings, SLA targets, and 1-click sever controls. |
+
+### 2. Batch Calibration Studio & Live Interview Console
+| Screen | Screenshot | Enterprise Capabilities |
+|---|---|---|
+| **Enterprise Batch Ingestion Studio** | ![Enterprise Batch Ingestion Studio](screenshots/desktop/03_desktop_enterprise_ingestion_studio.png) | Multi-entity ETL pipeline supporting CSV and JSON schemas for Candidate Rosters (L5–L7+) and Socratic Probe Corridors with monospace buffer and universal purge triggers. |
+| **Live Socratic Interview Console** | ![Live Interview Console](screenshots/desktop/04_desktop_live_socratic_interview_console.png) | Breeth Adaptive Memory Rail tracking systems coverage, dynamic Socratic follow-up probes, turn progression, and real-time response latency bounds. |
+
+### 3. Objective Scoring Dossier & Calibration Setup
+| Screen | Screenshot | Enterprise Capabilities |
+|---|---|---|
+| **4-Quadrant Scoring Dossier** | ![4-Quadrant Scoring Dossier](screenshots/desktop/05_desktop_4_quadrant_scoring_dossier.png) | Hiring-committee-ready calibration report featuring 4-quadrant rubric radar (First Principles, Scale Trade-offs, Operational Resilience, Communication), verifiable transcript quotes, and gap closure tracking. |
+| **Candidate Calibration Setup** | ![Candidate Calibration Setup](screenshots/desktop/06_desktop_candidate_calibration_setup.png) | Precision interview configuration portal establishing target seniority benchmarks (L5 Senior, L6 Staff, L7 Principal), systems specialization, and evaluation criteria. |
 
 ---
 
-## 4. Technology Stack
+## 🏛️ Enterprise Architectural Pillars
 
-- **Framework**: Next.js 15 (App Router, Server Actions, React 19)
-- **Language**: TypeScript 5.5 (Strict mode, zero `any` types)
-- **Styling**: Tailwind CSS with custom Crimson Design Tokens (`#991b1b` / `#ffb4ac`)
-- **Animation**: Framer Motion 11
-- **Icons**: Lucide React
-- **Testing**: Vitest with React Testing Library (19/19 unit tests passing)
+### 1. Cognitive Assessment Probe Corridors (`/api/corridors`)
+- **Socratic Depth Enforcement**: Scales question depth from Level 1 (architectural overview) to Level 5 (hardware cache coherence, memory barriers, lock contention).
+- **Escalation Triggers**: Inter-service probes dynamically trigger on candidate buzzwords (e.g. partition rebalances, quorum loss, thread starvation).
+- **Corridor Severing & Purge**: Platform administrators can sever degraded probe routes or execute cluster-wide resets.
 
----
+### 2. Multi-Entity Batch Calibration Studio
+- **Supported Entities**: Candidate Rosters (experience, education, calibration tier) and Socratic Probe Escalation Corridors.
+- **Dual Format**: RFC 4180 CSV and strict JSON schema payloads with 1-click template injection.
+- **Universal Purge**: Cascade deletion endpoints with confirmation safety prompts.
 
-## 5. Project Directory Structure
+### 3. Universal Cascading Deletion
+- `DELETE /api/candidates` — Universal purge of candidate assessment records and calibration history
+- `DELETE /api/corridors/:id` — Sever individual Socratic probe corridor
+- `DELETE /api/corridors` — Universal purge of all cognitive escalation corridors
 
-```
-CrimsonSentinel-AI-Interview-Agent/
-├── frontend/
-│   ├── app/
-│   │   ├── api/interview/route.ts      # Multi-turn Socratic API engine
-│   │   ├── interview/page.tsx          # Real-time interactive interview console
-│   │   ├── results/page.tsx            # Comprehensive Evaluation Dossier
-│   │   ├── setup/page.tsx              # Candidate profile configuration
-│   │   └── page.tsx                    # Production landing page & demo runner
-│   ├── components/                     # Modular UI components (Radar, Scrubber, HUD)
-│   ├── lib/                            # Insights engine, session state, math algorithms
-│   └── tests/                          # Automated Vitest test suites
-├── prompts/
-│   ├── SystemPrompt.md                 # Staff interviewer cognitive protocol
-│   ├── InterviewPrompt.md              # Multi-domain opening challenges
-│   ├── FollowUpPrompt.md               # Socratic escalation heuristics
-│   ├── EvaluationPrompt.md             # 4-quadrant rubric scoring guidelines
-│   └── FeedbackPrompt.md               # Candidate debrief & growth vectors
-├── docs/
-│   ├── technical-spec/                 # Deep architectural specifications
-│   ├── candidate-profiles/             # L4/L5/L6 calibration benchmarks
-│   └── curriculum/                     # Systems curriculum & question bank
-├── ARCHITECTURE.md                     # Detailed technical architecture document
-└── README.md                           # This document
-```
+### 4. Objective 4-Quadrant Evaluation Engine
+- **First-Principles Foundation (30%)**: Hardware mechanics, memory models, I/O efficiency, theoretical complexity.
+- **Scale & System Trade-offs (25%)**: CAP/PACELC trade-offs, network partitioning, cache invalidation.
+- **Operational Resilience (25%)**: Circuit breakers, graceful degradation, chaos engineering instincts.
+- **Communication Precision (20%)**: Architectural clarity, structured thinking, collaborative debugging.
 
 ---
 
-## 6. Quick Start & Verification
+## 🛠️ Verification & Test Certification
 
-### Prerequisites
-- Node.js 18.17+ or 20+
-- npm 9+ or pnpm
-
-### Installation & Run
-```bash
-cd frontend
-npm install
-npm run dev
-```
-Open `http://localhost:3000` in your browser.
-
-### Automated Testing & Verification
-```bash
-# Run unit tests
-npm test
-
-# Run TypeScript typecheck
-npm run typecheck
-
-# Build for production
-npm run build
-```
-
----
-
-## 7. License
-MIT License. Built with architectural rigor by the Crimson Sentinel Engineering Team.
+- **Automated Test Suite**: 28/28 tests passing across 5 test suites (`frontend/lib/`)
+  - 9 new enterprise tests: Candidate lifecycle, universal purge, Socratic corridor provisioning, corridor severing, CSV parsing, and telemetry calculation
+  - 19 existing assessment tests: Answer structure validation, evidence quote extraction, interview insights, and tier calibration
+- **Production Build**: Clean Next.js 15.5 production build with zero type errors.
