@@ -18,6 +18,8 @@ import { cn } from "@/lib/utils";
 import { CognitiveTopologyMesh } from "@/components/CognitiveTopologyMesh";
 import { BulkIngestionStudio } from "@/components/BulkIngestionStudio";
 
+import { PolygraphAnalyzer } from "@/components/PolygraphAnalyzer";
+
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: (i: number) => ({
@@ -36,6 +38,7 @@ export default function LandingPage() {
   const [status, setStatus] = useState<SessionStatus>({ kind: "none" });
   const [showMesh, setShowMesh] = useState(false);
   const [showIngestion, setShowIngestion] = useState(false);
+  const [showPolygraph, setShowPolygraph] = useState(false);
 
   useEffect(() => {
     setStatus(getSessionStatus());
@@ -177,6 +180,16 @@ export default function LandingPage() {
             >
               Batch Ingestion
             </button>
+            <button
+              type="button"
+              onClick={() => setShowPolygraph(true)}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "lg" }),
+                "h-11 rounded border-emerald-800/60 bg-emerald-950/30 px-6 font-code text-code-md text-emerald-300 hover:border-emerald-600 hover:bg-emerald-950/60 hover:text-emerald-200"
+              )}
+            >
+              AI Polygraph
+            </button>
             <Link
               href="/#process"
               className="font-code text-code-md text-muted-foreground underline-offset-4 hover:text-on-surface hover:underline"
@@ -274,6 +287,10 @@ export default function LandingPage() {
 
       {showIngestion && (
         <BulkIngestionStudio onClose={() => setShowIngestion(false)} />
+      )}
+
+      {showPolygraph && (
+        <PolygraphAnalyzer onClose={() => setShowPolygraph(false)} />
       )}
 
       <SiteFooter />
