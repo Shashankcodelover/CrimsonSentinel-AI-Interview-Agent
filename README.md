@@ -70,3 +70,15 @@
   - 9 new enterprise tests: Candidate lifecycle, universal purge, Socratic corridor provisioning, corridor severing, CSV parsing, and telemetry calculation
   - 19 existing assessment tests: Answer structure validation, evidence quote extraction, interview insights, and tier calibration
 - **Production Build**: Clean Next.js 15.5 production build with zero type errors.
+
+
+## User Flow Verification
+
+![User Flow](docs/crimson_home_verified.png)
+![User Flow](docs/crimson_polygraph_verified.png)
+![User Flow](docs/crimson_sentinel_active_verified.png)
+![User Flow](docs/crimson_sentinel_console_verified.png)
+![User Flow](docs/crimson_sentinel_landing_verified.png)
+![User Flow](docs/crimson_sentinel_results_verified.png)
+![User Flow](docs/crimson_sentinel_setup_verified.png)
+
