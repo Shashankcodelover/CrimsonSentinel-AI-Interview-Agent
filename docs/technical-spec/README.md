@@ -1,39 +1,41 @@
-﻿# Crimson Sentinel — Technical Specification
+# Crimson Sentinel — Technical Specification
 
 ## 1. System Overview
-Crimson Sentinel is an autonomous, multi-signal AI interviewing platform built to evaluate candidates on senior and principal engineering expectations. Unlike traditional trivia-based or coding-sandbox platforms, Crimson Sentinel operates as an adaptive Socratic conversational partner that assesses architectural soundness, trade-off awareness, and operational resilience under real-world production stress.
+Crimson Sentinel is a technical interview front-end application and mock service built to evaluate candidates through structured conversational turns. It combines a Next.js console interface with client-side heuristic evaluation modules that score candidate text on architectural terminology, trade-off awareness, and system design concepts.
 
 ## 2. Component Architecture
 ```
 +-------------------------------------------------------------+
 |               Next.js 15 App Router Frontend                |
-|  - Strategy Panel & Real-time Diagnostic HUD                |
-|  - Interactive Coverage Radar (Multi-Dimensional)           |
-|  - Breeth Adaptive Memory Rail & Ghost Probes               |
-|  - Rubric Mirror & Dynamic Gap-Closure Tracker              |
+|  - Candidate Setup & Warm-up Checklist (/setup)             |
+|  - Monospace Chat Console & Diagnostics HUD (/interview)    |
+|  - Answer Structure Coach (Claim / Mech / Tradeoff / Fail)   |
+|  - 6-Axis Polar Topic Coverage Radar (SVG)                  |
+|  - Strategy Panel, Probe Cadence & Depth Meter              |
+|  - Evaluation Dossier & Rubric Mirror (/results)            |
 +-------------------------------------------------------------+
                               |
-                              | HTTP / SSE
+                              | HTTP JSON (fetch)
                               v
 +-------------------------------------------------------------+
-|              Sentinel Cognitive Reasoning Engine            |
-|  - Multi-Turn Socratic State Machine                        |
-|  - Signal-to-Noise Keyword & Entity Extractor               |
-|  - Rubric Calibration Engine (Staff/Principal Benchmarks)   |
-|  - Fallback Resilient Deterministic Evaluator               |
+|                    Mock API Routes & Store                  |
+|  - Simulated Latency Turn Handler (POST /api/interview)     |
+|  - In-Memory Candidate Mesh Store (GET/POST/DEL /api/cands) |
+|  - Probe Corridor Provisioning (GET/POST/DEL /api/corridors)|
+|  - RFC 4180 CSV & JSON Payload Parsers                      |
 +-------------------------------------------------------------+
                               |
                               v
 +-------------------------------------------------------------+
-|                Evaluation Dossier Generator                 |
-|  - 4-Quadrant Quantitative Scoring (0-100)                  |
-|  - Evidence Quote Linking & Counterfactual Generation       |
-|  - Actionable Hiring Committee Recommendation               |
+|                Evaluation Report Generator                  |
+|  - Quantitative Scoring Formula (0-100)                     |
+|  - Evidence Quote Extraction & Pressure Moment Analysis     |
+|  - Transcript Export (Markdown & JSON)                      |
 +-------------------------------------------------------------+
 ```
 
 ## 3. Key Telemetry & Metrics Tracked
-- **Signal Density**: Ratio of specific architectural concepts (WAL, quorum, Raft, TTL, p99, backpressure) to generic filler text.
-- **Probe Depth**: Dynamic integer level (1 to 5) reflecting how deep the candidate has penetrated into low-level mechanics.
-- **Cognitive Uncertainty**: Real-time evaluation of hedge language, contradictions, and response latency.
-- **Domain Coverage**: 6-axis polar coverage tracking ingestion, storage, networking, resilience, observability, and cost.
+- **Signal Term Density**: Frequency of concrete architectural terminology (e.g. WAL, quorum, Raft, TTL, p99, backpressure) detected in candidate responses.
+- **Probe Depth**: Depth percentage (0–100%) calculated from turn index and average response character length.
+- **Uncertainty Flags**: Detection of hedging phrases (e.g. "maybe", "probably", "i think") and concise answers under 22 words.
+- **Domain Coverage**: 6-axis polar coverage mapping keyword presence across Systems, Reliability, Data, Debugging, Tradeoffs, and Delivery.
