@@ -147,7 +147,7 @@ export function CognitiveTopologyMesh({ onClose, onOpenIngestion }: { onClose: (
             { label: 'AVG SOCRATIC DEPTH', value: metrics ? `${metrics.avgSocraticDepth} / 5` : '4.2 / 5', color: 'text-amber-400' },
             { label: 'SLA RESPONSE TARGET', value: metrics ? `${metrics.avgSlaResponseSec}s` : '45s', color: 'text-sky-400' },
             { label: 'CANDIDATE POOL', value: candidates.length, color: 'text-emerald-400' },
-            { label: 'CALIBRATION CONFIDENCE', value: metrics ? `${metrics.calibrationConfidencePct}%` : '98.4%', color: 'text-purple-400' }
+            { label: 'CALIBRATION CONFIDENCE', value: metrics ? `${metrics.calibrationConfidencePct}%` : '98.4%', color: 'text-blue-400' }
           ].map((stat, i) => (
             <div key={i} className="flex flex-col items-center justify-center p-2 rounded bg-[#11131a] border border-red-950/50">
               <span className="text-[10px] font-bold tracking-wider text-slate-500 uppercase">{stat.label}</span>
@@ -184,7 +184,7 @@ export function CognitiveTopologyMesh({ onClose, onOpenIngestion }: { onClose: (
                         {c.fromDomain}
                       </span>
                       <ArrowRight className="size-3 text-slate-600" />
-                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-purple-950/60 border border-purple-800/40 text-purple-300">
+                      <span className="px-2 py-0.5 rounded text-[11px] font-bold bg-blue-950/60 border border-blue-800/40 text-blue-300">
                         {c.toDomain}
                       </span>
                       <span className="px-1.5 py-0.5 rounded text-[10px] font-mono font-bold bg-amber-950/60 text-amber-300 border border-amber-800/40">
